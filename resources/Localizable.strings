@@ -1,0 +1,4 @@
+iw.component.com.idega.telecom.presentation.CurrentBalanceViewer.name=CurrentBalanceViewer
+ratorServicesSpringBean=Rator services provider
+select_services_provider_first=Please, select services provider first\!
+select_telecom_services_provider=Select telecom services provider
