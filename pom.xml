@@ -4,13 +4,13 @@
 	<parent>
 		 <groupId>com.idega.block.addon</groupId>
    		 <artifactId>com.idega.block.addon</artifactId>
-    	 <version>4.1.0</version>
+    	 <version>4.1.1-SNAPSHOT</version>
 	</parent>
 	<name>Idega Telecom</name>
 	<packaging>jar</packaging>
 	<groupId>com.idega.block.addon</groupId>
 	<artifactId>com.idega.telecom</artifactId>
-	<version>4.1.0</version>
+	<version>4.1.1-SNAPSHOT</version>
 	<inceptionYear>2008</inceptionYear>
 	<description>Telecom services</description>
 	<scm>
@@ -18,7 +18,8 @@
 			<connection>scm:cvs:ext:${user.name}@code.idega.com:/idega/cvs:${groupId}/${artifactId}/</connection>
 			<developerConnection>scm:cvs:ext:${user.name}@code.idega.com:/idega/cvs:${groupId}/${artifactId}/</developerConnection>
 		-->
-	  <tag>com_idega_block_addon-4_1_0</tag>
+    <connection>scm:cvs:ext:idegaweb@code.idega.com:/idega/cvs:com.idega.block.addon/com.idega.telecom</connection>
+    <developerConnection>scm:cvs:ext:idegaweb@code.idega.com:/idega/cvs:com.idega.block.addon/com.idega.telecom</developerConnection>
   </scm>
 	<developers>
 		<developer>
