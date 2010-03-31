@@ -1,9 +1,12 @@
 package com.idega.telecom.services.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class User {
+public class User implements Serializable {
 
+	private static final long serialVersionUID = -8084521756896388323L;
+	
 	private String name;
 	private String personalId;
 	private String email;

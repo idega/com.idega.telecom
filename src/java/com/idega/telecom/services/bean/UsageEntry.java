@@ -1,8 +1,11 @@
 package com.idega.telecom.services.bean;
 
-import com.idega.util.IWTimestamp;
+import java.io.Serializable;
+import java.sql.Timestamp;
 
-public class UsageEntry {
+public class UsageEntry implements Serializable {
+
+	private static final long serialVersionUID = 6717537117151515820L;
 
 	//	call,sms,data,credit
 	private String invoiceLines;
@@ -23,7 +26,7 @@ public class UsageEntry {
 	//	true if a local call,sms,data...
 	private boolean local;
 	
-	private IWTimestamp usageDate;
+	private Timestamp usageDate;
 
 	public String getInvoiceLines() {
 		return invoiceLines;
@@ -113,11 +116,11 @@ public class UsageEntry {
 		this.local = local;
 	}
 
-	public IWTimestamp getUsageDate() {
+	public Timestamp getUsageDate() {
 		return usageDate;
 	}
 
-	public void setUsageDate(IWTimestamp usageDate) {
+	public void setUsageDate(Timestamp usageDate) {
 		this.usageDate = usageDate;
 	}
 	

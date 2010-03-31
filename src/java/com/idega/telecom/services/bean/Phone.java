@@ -1,11 +1,13 @@
 package com.idega.telecom.services.bean;
 
+import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.List;
 
-import com.idega.util.IWTimestamp;
+public class Phone implements Serializable {
 
-public class Phone {
-
+	private static final long serialVersionUID = 6871974986477577796L;
+	
 	private String number;
 	private String ownerPersonalId;
 	private String userPersonalId;
@@ -32,7 +34,7 @@ public class Phone {
 	private boolean autoRefill;
 	private boolean goldNumber;
 	
-	private IWTimestamp startDate;
+	private Timestamp startDate;
 
 	public String getNumber() {
 		return number;
@@ -186,11 +188,11 @@ public class Phone {
 		this.goldNumber = goldNumber;
 	}
 
-	public IWTimestamp getStartDate() {
+	public Timestamp getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(IWTimestamp startDate) {
+	public void setStartDate(Timestamp startDate) {
 		this.startDate = startDate;
 	}
 }

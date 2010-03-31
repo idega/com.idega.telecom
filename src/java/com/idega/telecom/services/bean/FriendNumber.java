@@ -1,15 +1,18 @@
 package com.idega.telecom.services.bean;
 
-import com.idega.util.IWTimestamp;
+import java.io.Serializable;
+import java.sql.Timestamp;
 
-public class FriendNumber {
+public class FriendNumber implements Serializable {
 
+	private static final long serialVersionUID = -6159187850697530008L;
+	
 	private String friendNumber;
 	private String name;
 	private String connectedNumber;
 	private String errorMessage;
 	
-	private IWTimestamp lastChangedTimestamp;
+	private Timestamp lastChangedTimestamp;
 
 	public String getFriendNumber() {
 		return friendNumber;
@@ -43,11 +46,11 @@ public class FriendNumber {
 		this.errorMessage = errorMessage;
 	}
 
-	public IWTimestamp getLastChangedTimestamp() {
+	public Timestamp getLastChangedTimestamp() {
 		return lastChangedTimestamp;
 	}
 
-	public void setLastChangedTimestamp(IWTimestamp lastChangedTimestamp) {
+	public void setLastChangedTimestamp(Timestamp lastChangedTimestamp) {
 		this.lastChangedTimestamp = lastChangedTimestamp;
 	}
 	

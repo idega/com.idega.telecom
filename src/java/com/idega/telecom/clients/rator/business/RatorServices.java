@@ -2,6 +2,7 @@ package com.idega.telecom.clients.rator.business;
 
 import java.util.List;
 
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,7 @@ import com.idega.telecom.services.bean.UsageEntry;
 import com.idega.telecom.services.bean.User;
 import com.idega.telecom.services.business.TelecomServices;
 
-@Scope("singleton")
+@Scope(BeanDefinition.SCOPE_SINGLETON)
 @Service(TelecomConstants.RATOR_SERVICES_SPRING_BEAN_IDENTIFIER)
 public class RatorServices implements TelecomServices {
 	

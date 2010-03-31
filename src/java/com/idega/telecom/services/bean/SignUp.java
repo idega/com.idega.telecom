@@ -1,6 +1,10 @@
 package com.idega.telecom.services.bean;
 
-public class SignUp {
+import java.io.Serializable;
+
+public class SignUp implements Serializable {
+
+	private static final long serialVersionUID = -305990867692574350L;
 
 	private Phone phone;
 	

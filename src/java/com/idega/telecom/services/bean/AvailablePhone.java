@@ -1,6 +1,10 @@
 package com.idega.telecom.services.bean;
 
-public class AvailablePhone {
+import java.io.Serializable;
+
+public class AvailablePhone implements Serializable {
+
+	private static final long serialVersionUID = 4946406425903725069L;
 
 	private String number;
 	
