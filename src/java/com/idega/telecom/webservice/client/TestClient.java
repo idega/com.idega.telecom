@@ -19,8 +19,13 @@ public class TestClient {
 			//((org.apache.axis.client.Stub) port).setTimeout(2000);
 			
 			User user = port.userGetByNumberAndPassword("8671374", "uaga22");//userGetByNumber("8671374");
+			if (user == null) {
+				System.out.println("user is null");
+			}
 			
-			
+			Phone phone = port.phoneGetByNumber("8671374");
+			System.out.println(Float.toString(phone.getBalance()));
+			System.out.println(phone.getStartDate());
 			
 			
 			/*FriendNumber numbers[] = port.friendsGetByNumber("8671374");
