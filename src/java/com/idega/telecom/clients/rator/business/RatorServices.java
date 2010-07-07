@@ -130,25 +130,98 @@ public class RatorServices implements TelecomServices {
 
 	public List<UsageEntry> getUsageEntriesByNumberAndType(String number,
 			String fromDate, String toDate, String type) {
-		return null;
+		List<UsageEntry> entries = new ArrayList<UsageEntry>();
+
+		IWTimestamp from = new IWTimestamp(fromDate);
+		IWTimestamp to = new IWTimestamp(toDate);
+		try {
+			com.idega.telecom.webservice.client.UsageEntry wsEntries[] = getWSClient()
+					.usageEntryGetByNumberAndDate(number, from.getCalendar(),
+							to.getCalendar());
+			if (wsEntries != null && wsEntries.length != 0) {
+				for (int i = 0; i < wsEntries.length; i++) {
+					UsageEntry entry = convertWSUsageEntryToUsageEntry(wsEntries[i]);
+					if (type.equals(entry.getEntryType())) {
+						entries.add(entry);
+					}
+				}
+			}
+		} catch (RemoteException e) {
+		}
+
+		return entries;
 	}
 
 	public List<UsageEntry> getUsageEntriesByPersonalId(String personalId,
 			String fromDate, String toDate) {
-		return null;
+		List<UsageEntry> entries = new ArrayList<UsageEntry>();
+
+		IWTimestamp from = new IWTimestamp(fromDate);
+		IWTimestamp to = new IWTimestamp(toDate);
+		try {
+			com.idega.telecom.webservice.client.UsageEntry wsEntries[] = getWSClient()
+					.usageEntryGetByPersonalIdAndDate(personalId, from.getCalendar(),
+							to.getCalendar());
+			if (wsEntries != null && wsEntries.length != 0) {
+				for (int i = 0; i < wsEntries.length; i++) {
+					UsageEntry entry = convertWSUsageEntryToUsageEntry(wsEntries[i]);
+					entries.add(entry);
+				}
+			}
+		} catch (RemoteException e) {
+		}
+
+		return entries;
 	}
 
 	public List<UsageEntry> getUsageEntriesByPersonalIdAndType(
 			String personalId, String fromDate, String toDate, String type) {
-		return null;
+		List<UsageEntry> entries = new ArrayList<UsageEntry>();
+
+		IWTimestamp from = new IWTimestamp(fromDate);
+		IWTimestamp to = new IWTimestamp(toDate);
+		try {
+			com.idega.telecom.webservice.client.UsageEntry wsEntries[] = getWSClient()
+					.usageEntryGetByPersonalIdAndDate(personalId, from.getCalendar(),
+							to.getCalendar());
+			if (wsEntries != null && wsEntries.length != 0) {
+				for (int i = 0; i < wsEntries.length; i++) {
+					UsageEntry entry = convertWSUsageEntryToUsageEntry(wsEntries[i]);
+					if (type.equals(entry.getEntryType())) {
+						entries.add(entry);
+					}
+				}
+			}
+		} catch (RemoteException e) {
+		}
+
+		return entries;
 	}
 
 	public User getUserByNumber(String number) {
-		return null;
+		User user = null;
+		try {
+			com.idega.telecom.webservice.client.User wsUser = getWSClient().userGetByNumber(number);
+			if (wsUser != null) {
+				user = convertWSUserToUser(wsUser);
+			}
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return user;
 	}
 
 	public User getUserByPersonalId(String personalId) {
-		return null;
+		User user = null;
+		try {
+			com.idega.telecom.webservice.client.User wsUser = getWSClient().userFindByPersonalId(personalId);
+			if (wsUser != null) {
+				user = convertWSUserToUser(wsUser);
+			}
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return user;
 	}
 
 	public User getUserByUserNameAndPassword(String userName, String password) {
@@ -199,6 +272,13 @@ public class RatorServices implements TelecomServices {
 	}
 
 	public boolean verifyPhoneNumberOwner(String personalId, String number) {
+		Phone phone = getPhone(number);
+		if (phone != null) {
+			if (phone.getOwnerPersonalId().equals(personalId)) {
+				return true;
+			}
+		}
+		
 		return false;
 	}
 
