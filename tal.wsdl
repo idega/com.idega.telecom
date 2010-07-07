@@ -1,0 +1,601 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="TestHelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="TestHelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TestHelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TestDbConnection">
+        <s:complexType />
+      </s:element>
+      <s:element name="TestDbConnectionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="TestDbConnectionResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserFindByPersonalId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="personalId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserFindByPersonalIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserFindByPersonalIdResult" type="tns:User" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="User">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PersonalId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StreetAndNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Zip" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Country" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HomePhone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GsmPhone" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UserGetByPersonalIdAndPassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="personalId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserGetByPersonalIdAndPasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserGetByPersonalIdAndPasswordResult" type="tns:User" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserGetByNumberAndPassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="number" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserGetByNumberAndPasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserGetByNumberAndPasswordResult" type="tns:User" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserGetAll">
+        <s:complexType />
+      </s:element>
+      <s:element name="UserGetAllResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserGetAllResult" type="tns:ArrayOfUser" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfUser">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="User" nillable="true" type="tns:User" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UserGetByNumber">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="number" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserGetByNumberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserGetByNumberResult" type="tns:User" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserUpdatePassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="number" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="oldPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="newPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserUpdatePasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserUpdatePasswordResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PhoneGetByNumber">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="number" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PhoneGetByNumberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PhoneGetByNumberResult" type="tns:Phone" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Phone">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Number" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OwnerPersonalID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserPersonalID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BillReceiverPersonalID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Pin1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Puk1" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Balance" type="s:float" />
+          <s:element minOccurs="0" maxOccurs="1" name="FriendNumbers" type="tns:ArrayOfString" />
+          <s:element minOccurs="1" maxOccurs="1" name="ForeignNumberLockEnabled" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ForeignServiceNumberLockEnabled" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ServiceType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PaymentType" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreditCardNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreditCardExpiryMonth" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreditCardExpiryYear" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreditCardCVC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AutoRefill" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AutoRefillAmount" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StartDate" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsGoldNumber" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UsageEntryGetByPersonalIdAndDate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="personalId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="fromDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="toDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UsageEntryGetByPersonalIdAndDateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UsageEntryGetByPersonalIdAndDateResult" type="tns:ArrayOfUsageEntry" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfUsageEntry">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UsageEntry" nillable="true" type="tns:UsageEntry" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UsageEntry">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UsageDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EntryType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Number" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OriginPhoneNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountryOfOrigin" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RecipientCountry" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:float" />
+          <s:element minOccurs="1" maxOccurs="1" name="Duration" type="s:float" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UsageEntryGetByNumberAndDate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mobileNumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="fromDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="toDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UsageEntryGetByNumberAndDateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UsageEntryGetByNumberAndDateResult" type="tns:ArrayOfUsageEntry" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FriendsGetByNumber">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="number" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FriendsGetByNumberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FriendsGetByNumberResult" type="tns:ArrayOfFriendNumber" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfFriendNumber">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FriendNumber" nillable="true" type="tns:FriendNumber" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FriendNumber">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Number" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastChangedDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreateDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EndDate" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="TestHelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:TestHelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="TestHelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:TestHelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="TestDbConnectionSoapIn">
+    <wsdl:part name="parameters" element="tns:TestDbConnection" />
+  </wsdl:message>
+  <wsdl:message name="TestDbConnectionSoapOut">
+    <wsdl:part name="parameters" element="tns:TestDbConnectionResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserFindByPersonalIdSoapIn">
+    <wsdl:part name="parameters" element="tns:UserFindByPersonalId" />
+  </wsdl:message>
+  <wsdl:message name="UserFindByPersonalIdSoapOut">
+    <wsdl:part name="parameters" element="tns:UserFindByPersonalIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserGetByPersonalIdAndPasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:UserGetByPersonalIdAndPassword" />
+  </wsdl:message>
+  <wsdl:message name="UserGetByPersonalIdAndPasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:UserGetByPersonalIdAndPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserGetByNumberAndPasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:UserGetByNumberAndPassword" />
+  </wsdl:message>
+  <wsdl:message name="UserGetByNumberAndPasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:UserGetByNumberAndPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserGetAllSoapIn">
+    <wsdl:part name="parameters" element="tns:UserGetAll" />
+  </wsdl:message>
+  <wsdl:message name="UserGetAllSoapOut">
+    <wsdl:part name="parameters" element="tns:UserGetAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserGetByNumberSoapIn">
+    <wsdl:part name="parameters" element="tns:UserGetByNumber" />
+  </wsdl:message>
+  <wsdl:message name="UserGetByNumberSoapOut">
+    <wsdl:part name="parameters" element="tns:UserGetByNumberResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserUpdatePasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:UserUpdatePassword" />
+  </wsdl:message>
+  <wsdl:message name="UserUpdatePasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:UserUpdatePasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="PhoneGetByNumberSoapIn">
+    <wsdl:part name="parameters" element="tns:PhoneGetByNumber" />
+  </wsdl:message>
+  <wsdl:message name="PhoneGetByNumberSoapOut">
+    <wsdl:part name="parameters" element="tns:PhoneGetByNumberResponse" />
+  </wsdl:message>
+  <wsdl:message name="UsageEntryGetByPersonalIdAndDateSoapIn">
+    <wsdl:part name="parameters" element="tns:UsageEntryGetByPersonalIdAndDate" />
+  </wsdl:message>
+  <wsdl:message name="UsageEntryGetByPersonalIdAndDateSoapOut">
+    <wsdl:part name="parameters" element="tns:UsageEntryGetByPersonalIdAndDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="UsageEntryGetByNumberAndDateSoapIn">
+    <wsdl:part name="parameters" element="tns:UsageEntryGetByNumberAndDate" />
+  </wsdl:message>
+  <wsdl:message name="UsageEntryGetByNumberAndDateSoapOut">
+    <wsdl:part name="parameters" element="tns:UsageEntryGetByNumberAndDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="FriendsGetByNumberSoapIn">
+    <wsdl:part name="parameters" element="tns:FriendsGetByNumber" />
+  </wsdl:message>
+  <wsdl:message name="FriendsGetByNumberSoapOut">
+    <wsdl:part name="parameters" element="tns:FriendsGetByNumberResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WebServiceCDRatorDevSoap">
+    <wsdl:operation name="TestHelloWorld">
+      <wsdl:input message="tns:TestHelloWorldSoapIn" />
+      <wsdl:output message="tns:TestHelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TestDbConnection">
+      <wsdl:input message="tns:TestDbConnectionSoapIn" />
+      <wsdl:output message="tns:TestDbConnectionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserFindByPersonalId">
+      <wsdl:input message="tns:UserFindByPersonalIdSoapIn" />
+      <wsdl:output message="tns:UserFindByPersonalIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserGetByPersonalIdAndPassword">
+      <wsdl:input message="tns:UserGetByPersonalIdAndPasswordSoapIn" />
+      <wsdl:output message="tns:UserGetByPersonalIdAndPasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserGetByNumberAndPassword">
+      <wsdl:input message="tns:UserGetByNumberAndPasswordSoapIn" />
+      <wsdl:output message="tns:UserGetByNumberAndPasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserGetAll">
+      <wsdl:input message="tns:UserGetAllSoapIn" />
+      <wsdl:output message="tns:UserGetAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserGetByNumber">
+      <wsdl:input message="tns:UserGetByNumberSoapIn" />
+      <wsdl:output message="tns:UserGetByNumberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserUpdatePassword">
+      <wsdl:input message="tns:UserUpdatePasswordSoapIn" />
+      <wsdl:output message="tns:UserUpdatePasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PhoneGetByNumber">
+      <wsdl:input message="tns:PhoneGetByNumberSoapIn" />
+      <wsdl:output message="tns:PhoneGetByNumberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UsageEntryGetByPersonalIdAndDate">
+      <wsdl:input message="tns:UsageEntryGetByPersonalIdAndDateSoapIn" />
+      <wsdl:output message="tns:UsageEntryGetByPersonalIdAndDateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UsageEntryGetByNumberAndDate">
+      <wsdl:input message="tns:UsageEntryGetByNumberAndDateSoapIn" />
+      <wsdl:output message="tns:UsageEntryGetByNumberAndDateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FriendsGetByNumber">
+      <wsdl:input message="tns:FriendsGetByNumberSoapIn" />
+      <wsdl:output message="tns:FriendsGetByNumberSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WebServiceCDRatorDevSoap" type="tns:WebServiceCDRatorDevSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="TestHelloWorld">
+      <soap:operation soapAction="http://tempuri.org/TestHelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestDbConnection">
+      <soap:operation soapAction="http://tempuri.org/TestDbConnection" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserFindByPersonalId">
+      <soap:operation soapAction="http://tempuri.org/UserFindByPersonalId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserGetByPersonalIdAndPassword">
+      <soap:operation soapAction="http://tempuri.org/UserGetByPersonalIdAndPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserGetByNumberAndPassword">
+      <soap:operation soapAction="http://tempuri.org/UserGetByNumberAndPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserGetAll">
+      <soap:operation soapAction="http://tempuri.org/UserGetAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserGetByNumber">
+      <soap:operation soapAction="http://tempuri.org/UserGetByNumber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserUpdatePassword">
+      <soap:operation soapAction="http://tempuri.org/UserUpdatePassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PhoneGetByNumber">
+      <soap:operation soapAction="http://tempuri.org/PhoneGetByNumber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UsageEntryGetByPersonalIdAndDate">
+      <soap:operation soapAction="http://tempuri.org/UsageEntryGetByPersonalIdAndDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UsageEntryGetByNumberAndDate">
+      <soap:operation soapAction="http://tempuri.org/UsageEntryGetByNumberAndDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FriendsGetByNumber">
+      <soap:operation soapAction="http://tempuri.org/FriendsGetByNumber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebServiceCDRatorDevSoap12" type="tns:WebServiceCDRatorDevSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="TestHelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/TestHelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestDbConnection">
+      <soap12:operation soapAction="http://tempuri.org/TestDbConnection" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserFindByPersonalId">
+      <soap12:operation soapAction="http://tempuri.org/UserFindByPersonalId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserGetByPersonalIdAndPassword">
+      <soap12:operation soapAction="http://tempuri.org/UserGetByPersonalIdAndPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserGetByNumberAndPassword">
+      <soap12:operation soapAction="http://tempuri.org/UserGetByNumberAndPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserGetAll">
+      <soap12:operation soapAction="http://tempuri.org/UserGetAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserGetByNumber">
+      <soap12:operation soapAction="http://tempuri.org/UserGetByNumber" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserUpdatePassword">
+      <soap12:operation soapAction="http://tempuri.org/UserUpdatePassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PhoneGetByNumber">
+      <soap12:operation soapAction="http://tempuri.org/PhoneGetByNumber" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UsageEntryGetByPersonalIdAndDate">
+      <soap12:operation soapAction="http://tempuri.org/UsageEntryGetByPersonalIdAndDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UsageEntryGetByNumberAndDate">
+      <soap12:operation soapAction="http://tempuri.org/UsageEntryGetByNumberAndDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FriendsGetByNumber">
+      <soap12:operation soapAction="http://tempuri.org/FriendsGetByNumber" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebServiceCDRatorDev">
+    <wsdl:port name="WebServiceCDRatorDevSoap" binding="tns:WebServiceCDRatorDevSoap">
+      <soap:address location="http://192.168.99.187:81/cdratordev/webservicecdratordev.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebServiceCDRatorDevSoap12" binding="tns:WebServiceCDRatorDevSoap12">
+      <soap12:address location="http://192.168.99.187:81/cdratordev/webservicecdratordev.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

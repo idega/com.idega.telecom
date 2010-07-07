@@ -19,7 +19,16 @@ public class UsageEntry implements Serializable {
 	private String recipientCountry;
 	private String amount;
 	private String duration;
+	private String entryType;
 	
+	public String getEntryType() {
+		return entryType;
+	}
+
+	public void setEntryType(String entryType) {
+		this.entryType = entryType;
+	}
+
 	//	empty if not a credit entry otherwise in form e.g. AA-07-... like todays pdf bill names
 	private String billName;
 	
