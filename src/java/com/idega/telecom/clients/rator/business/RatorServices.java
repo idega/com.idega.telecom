@@ -319,6 +319,7 @@ public class RatorServices implements TelecomServices {
 		number.setConnectedNumber(connectedNumber);
 		number.setFriendNumber(wsFriendNumber.getNumber());
 		IWTimestamp lt = new IWTimestamp(wsFriendNumber.getLastChangedDate());
+		//IWTimestamp lt = new IWTimestamp()
 		number.setLastChangedTimestamp(lt.getTimestamp());
 
 		return number;
@@ -350,8 +351,8 @@ public class RatorServices implements TelecomServices {
 		phone.setServiceNumberLockEnabled(wsPhone
 				.isForeignServiceNumberLockEnabled());
 		phone.setServiceType(wsPhone.getServiceType());
-		phone.setStartDate(new IWTimestamp(wsPhone.getStartDate())
-				.getTimestamp());
+		//phone.setStartDate(new IWTimestamp(wsPhone.getStartDate())
+		//		.getTimestamp());
 		phone.setUserPersonalId(wsPhone.getUserPersonalID());
 
 		return phone;
