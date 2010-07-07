@@ -1,6 +1,8 @@
 package com.idega.telecom.clients.rator.business;
 
 import java.rmi.RemoteException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -318,9 +320,13 @@ public class RatorServices implements TelecomServices {
 
 		number.setConnectedNumber(connectedNumber);
 		number.setFriendNumber(wsFriendNumber.getNumber());
-		IWTimestamp lt = new IWTimestamp(wsFriendNumber.getLastChangedDate());
-		//IWTimestamp lt = new IWTimestamp()
-		number.setLastChangedTimestamp(lt.getTimestamp());
+		SimpleDateFormat sdfDestination = new SimpleDateFormat("dd.MM.yyyy hh:mm:ss");
+		try {
+			IWTimestamp lt = new IWTimestamp(sdfDestination.parse(wsFriendNumber.getLastChangedDate()));
+			number.setLastChangedTimestamp(lt.getTimestamp());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 
 		return number;
 	}
@@ -351,8 +357,14 @@ public class RatorServices implements TelecomServices {
 		phone.setServiceNumberLockEnabled(wsPhone
 				.isForeignServiceNumberLockEnabled());
 		phone.setServiceType(wsPhone.getServiceType());
-		//phone.setStartDate(new IWTimestamp(wsPhone.getStartDate())
-		//		.getTimestamp());
+		SimpleDateFormat sdfDestination = new SimpleDateFormat("dd.MM.yyyy hh:mm:ss");
+
+		try {
+			phone.setStartDate(new IWTimestamp(sdfDestination.parse(wsPhone.getStartDate()))
+					.getTimestamp());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		phone.setUserPersonalId(wsPhone.getUserPersonalID());
 
 		return phone;

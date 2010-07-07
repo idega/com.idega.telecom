@@ -1,5 +1,9 @@
 package com.idega.telecom.webservice.client;
 
+import java.text.SimpleDateFormat;
+
+import com.idega.util.IWTimestamp;
+
 public class TestClient {
 
 	/**
@@ -26,6 +30,11 @@ public class TestClient {
 			Phone phone = port.phoneGetByNumber("8671374");
 			System.out.println(Float.toString(phone.getBalance()));
 			System.out.println(phone.getStartDate());
+			
+			SimpleDateFormat sdfDestination = new SimpleDateFormat("dd.MM.yyyy hh:mm:ss");
+			IWTimestamp stamp = new IWTimestamp(sdfDestination.parse(phone.getStartDate()));
+			
+			System.out.println("stamp = " + stamp.toString());
 			
 			
 			/*FriendNumber numbers[] = port.friendsGetByNumber("8671374");
