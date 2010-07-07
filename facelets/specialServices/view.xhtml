@@ -1,0 +1,33 @@
+<html
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:c="http://xmlns.idega.com/com.idega.core"
+		xmlns:a="http://xmlns.idega.com/is.idega.idegaweb.egov.application"
+>
+<ui:component>
+	<table cellpadding="0" cellspacing="0" width="100%">
+		<thead>
+			<tr>
+				<th>&nbsp;</th>
+				<th><h:outputText value="#{localizedStrings['com.idega.telecom']['special_services.service']}" /></th>
+				<th><h:outputText value="#{localizedStrings['com.idega.telecom']['special_services.description']}" /></th>
+				<th><h:outputText value="#{localizedStrings['com.idega.telecom']['special_services.fee']}" /></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="odd">
+				<td><c:checkBox styleClass="enableService" name="prm_foreign_number_lock" content="true" checked="#{telecomSession.phone.foreignNumberLockEnabled}" /></td>
+				<td><h:outputText value="#{localizedStrings['com.idega.telecom']['special_services.foreign_number_lock']}" /></td>
+				<td><span class="description" title="#{localizedStrings['com.idega.telecom']['special_services.foreign_number_lock_description']}"></span></td>
+				<td><h:outputText value="#{localizedStrings['com.idega.telecom']['special_services.foreign_number_lock_fee']}" /></td>
+			</tr>
+			<tr class="even">
+				<td><c:checkBox styleClass="enableService" name="prm_service_number_lock" content="true" checked="#{telecomSession.phone.serviceNumberLockEnabled}" /></td>
+				<td><h:outputText value="#{localizedStrings['com.idega.telecom']['special_services.service_number_lock']}" /></td>
+				<td><span class="description" title="#{localizedStrings['com.idega.telecom']['special_services.service_number_lock_description']}"></span></td>
+				<td><h:outputText value="#{localizedStrings['com.idega.telecom']['special_services.service_number_lock_fee']}" /></td>
+			</tr>
+		</tbody>
+	</table>
+</ui:component>
+</html>

@@ -5,7 +5,7 @@ import javax.faces.context.FacesContext;
 public class PaymentMethod extends TelecomBlock {
 
 	@Override
-	public void present(FacesContext context) {
+	protected void present(FacesContext context) {
 	}
 
 }

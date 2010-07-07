@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 3.0//EN" "http://getahead.org/dwr//dwr30.dtd">
+
+<dwr>
+	<allow>
+        <create creator="jsf" javascript="TelecomBusiness">
+            <param name="managedBeanName" value="ratorServicesSpringBean" />
+            <param name="class" value="com.idega.telecom.clients.rator.business.RatorServices" />
+            <include method="updatePhone" />
+        </create>
+		
+        <create creator="jsf" javascript="TelecomSession">
+            <param name="managedBeanName" value="telecomSession" />
+            <param name="class" value="com.idega.telecom.business.TelecomSession" />
+            <include method="getPhone" />
+            <include method="getUser" />
+        </create>
+		
+		<convert converter="bean" match="com.idega.telecom.services.bean.User" />
+		<convert converter="bean" match="com.idega.telecom.services.bean.Phone" />
+	</allow>
+</dwr>

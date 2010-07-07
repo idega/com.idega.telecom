@@ -2,16 +2,25 @@ package com.idega.telecom.presentation;
 
 import javax.faces.context.FacesContext;
 
+import com.idega.facelets.ui.FaceletComponent;
+import com.idega.presentation.IWContext;
 import com.idega.telecom.services.bean.Phone;
 
 public class UnlockCodes extends TelecomBlock {
 
 	@Override
-	public void present(FacesContext context) {
-		Phone phone = getTelecomServices().getPhone("");
+	protected void present(FacesContext context) {
+		IWContext iwc = IWContext.getIWContext(context);
 		
-		String PIN = phone.getPin1();
-		String PUK = phone.getPuk1();
+		Phone phone = getTelecomSession().getPhone();
+		if (phone != null) {
+			view(iwc, phone);
+		}
 	}
-
+	
+	private void view(IWContext iwc, Phone phone) {
+		FaceletComponent facelet = (FaceletComponent) iwc.getApplication().createComponent(FaceletComponent.COMPONENT_TYPE);
+		facelet.setFaceletURI(getBundle().getFaceletURI("unlockCodes/view.xhtml"));
+		add(facelet);
+	}
 }

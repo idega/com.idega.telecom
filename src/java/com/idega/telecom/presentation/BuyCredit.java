@@ -13,7 +13,7 @@ public class BuyCredit extends TelecomBlock {
 	private static final String PARAMETER_AMOUNT = "prm_amount";
 	
 	@Override
-	public void present(FacesContext context) {
+	protected void present(FacesContext context) {
 	}
 
 	private void save(IWContext iwc) {

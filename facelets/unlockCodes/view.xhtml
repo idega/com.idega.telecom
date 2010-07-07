@@ -1,0 +1,19 @@
+<html
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:c="http://xmlns.idega.com/com.idega.core"
+		xmlns:a="http://xmlns.idega.com/is.idega.idegaweb.egov.application"
+>
+<ui:component>
+	<div class="unlockCodes">
+		<div class="formItem">
+			<label><h:outputText value="#{localizedStrings['com.idega.telecom']['unlock_codes.pin']}" /></label>
+			<span><h:outputText value="#{telecomSession.phone.pin1}" /></span>
+		</div>
+		<div class="formItem">
+			<label><h:outputText value="#{localizedStrings['com.idega.telecom']['unlock_codes.puk']}" /></label>
+			<span><h:outputText value="#{telecomSession.phone.puk1}" /></span>
+		</div>
+	</div>
+</ui:component>
+</html>

@@ -2,24 +2,35 @@ package com.idega.telecom.presentation;
 
 import javax.faces.context.FacesContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.idega.block.web2.business.JQuery;
 import com.idega.idegaweb.IWBundle;
 import com.idega.idegaweb.IWResourceBundle;
 import com.idega.presentation.IWBaseComponent;
 import com.idega.presentation.IWContext;
-import com.idega.presentation.Layer;
-import com.idega.presentation.text.Heading1;
 import com.idega.telecom.TelecomConstants;
+import com.idega.telecom.business.TelecomSession;
 import com.idega.telecom.services.business.TelecomServices;
 import com.idega.util.PresentationUtil;
-import com.idega.util.StringUtil;
 import com.idega.util.expression.ELUtil;
 
 public abstract class TelecomBlock extends IWBaseComponent {
+
+	protected static final String PARAMETER_ACTION = "prm_action";
 	
-	private String beanIdentifier;
+	protected static final int ACTION_VIEW = 1;
+	protected static final int ACTION_SAVE = 2;
 	
-	private TelecomServices telecomServices;
+	@Autowired
+	private TelecomServices services;
 	
+	@Autowired
+	private TelecomSession session;
+	
+	@Autowired
+	private JQuery jQuery;
+
 	private IWBundle iwb;
 	private IWResourceBundle iwrb;
 	
@@ -31,55 +42,49 @@ public abstract class TelecomBlock extends IWBaseComponent {
 		
 		PresentationUtil.addStyleSheetToHeader(iwc, iwb.getVirtualPathWithFileNameString("style/telecom.css"));
 		
-		if (StringUtil.isEmpty(beanIdentifier)) {
-			add(getErrorMessage(iwrb.getLocalizedString("select_services_provider_first", "Please, select services provider first!")));
-			throw new NullPointerException("Spring bean must be provided!");
-		}
-		
-		if (getTelecomServices() == null) {
-			add(getErrorMessage(iwrb.getLocalizedString("unable_to_contact_selected_services_provider", "Sorry, uanble to contact selected services provider")));
-			throw new NullPointerException("Unable to get Spring bean: " + beanIdentifier);
-		}
-		
 		present(context);
 	}
 	
-	public abstract void present(FacesContext context);
-	
-	protected Layer getErrorMessage(String errorMessage) {
-		Layer container = new Layer();
-		add(container);
-		container.setStyleClass("errorMessage");
-		container.add(new Heading1(errorMessage));
-		return container;
-	}
-	
-	protected TelecomServices getTelecomServices() {
-		try {
-			telecomServices = ELUtil.getInstance().getBean(beanIdentifier);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			return null;
+	protected int parseAction(IWContext iwc) {
+		int action = ACTION_VIEW;
+		if (iwc.isParameterSet(PARAMETER_ACTION)) {
+			action = Integer.parseInt(iwc.getParameter(PARAMETER_ACTION));
 		}
 		
-		return telecomServices;
+		return action;
 	}
 	
+	protected abstract void present(FacesContext context);
+	
+	protected TelecomServices getTelecomServices() {
+		if (services == null) {
+			ELUtil.getInstance().autowire(this);
+		}
+		
+		return services;
+	}
+	
+	protected TelecomSession getTelecomSession() {
+		if (session == null) {
+			ELUtil.getInstance().autowire(this);
+		}
+		
+		return session;
+	}
+	
+	protected JQuery getJQuery() {
+		if (jQuery == null) {
+			ELUtil.getInstance().autowire(this);
+		}
+		return jQuery;
+	}
+
 	protected IWBundle getBundle() {
 		return iwb;
 	}
 
 	protected IWResourceBundle getResourceBundle() {
 		return iwrb;
-	}
-
-	public String getBeanIdentifier() {
-		return beanIdentifier;
-	}
-
-	public void setBeanIdentifier(String beanIdentifier) {
-		this.beanIdentifier = beanIdentifier;
 	}
 
 	public String getBundleIdentifier() {

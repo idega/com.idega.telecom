@@ -1,0 +1,26 @@
+<html
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:c="http://xmlns.idega.com/com.idega.core"
+		xmlns:f="http://java.sun.com/jsf/core"
+>
+<ui:component>
+	<form class="telecomLogin loggedOut" action="" method="post">
+		<input type="hidden" name="prm_logout" value="true" />
+		<h1><h:outputText value="#{localizedStrings['com.idega.telecom']['login.my_page']}" /></h1>
+		
+		<p class="user"><h:outputText value="#{telecomSession.user.name}" /></p>
+		<p class="phoneNumber"><h:outputText value="#{telecomSession.phone.number}" /></p>
+		<p class="balance">
+			<h:outputText value="#{localizedStrings['com.idega.telecom']['login.balance']}" />
+			<h:outputText value="#{telecomSession.phone.balance}">
+				<f:convertNumber type="currency" minFractionDigits="2" currencyCode="ISK"/>
+			</h:outputText>
+		</p>
+		
+		<div class="submit">
+			<a href="#"><span><h:outputText value="#{localizedStrings['com.idega.telecom']['login.logout']}" /></span></a>
+		</div>
+	</form>
+</ui:component>
+</html>

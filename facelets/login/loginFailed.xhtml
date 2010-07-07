@@ -1,0 +1,17 @@
+<html
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:c="http://xmlns.idega.com/com.idega.core"
+>
+<ui:component>
+	<form class="telecomLogin loginFailed" action="" method="post">
+		<h1><h:outputText value="#{localizedStrings['com.idega.telecom']['login.my_page']}" /></h1>
+		
+		<p class="errorMessage"><h:outputText value="#{localizedStrings['com.idega.telecom']['login.login_failed']}" /></p>
+		
+		<div class="submit">
+			<a href="#"><span><h:outputText value="#{localizedStrings['com.idega.telecom']['login.retry']}" /></span></a>
+		</div>
+	</form>
+</ui:component>
+</html>

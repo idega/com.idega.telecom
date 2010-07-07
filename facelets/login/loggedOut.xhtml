@@ -1,0 +1,25 @@
+<html
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:c="http://xmlns.idega.com/com.idega.core"
+>
+<ui:component>
+	<form class="telecomLogin loggedOut" action="" method="post">
+		<input type="hidden" name="prm_login" value="true" />
+		<h1><h:outputText value="#{localizedStrings['com.idega.telecom']['login.my_page']}" /></h1>
+		
+		<div class="formItem">
+			<label for="prm_username"><h:outputText value="#{localizedStrings['com.idega.telecom']['login.phone_number']}" /></label>
+			<c:textInput name="prm_username" />
+		</div>
+		<div class="formItem">
+			<label for="prm_password"><h:outputText value="#{localizedStrings['com.idega.telecom']['login.password']}" /></label>
+			<c:passwordInput name="prm_password" />
+		</div>
+		
+		<div class="submit">
+			<a href="#"><span><h:outputText value="#{localizedStrings['com.idega.telecom']['login.login']}" /></span></a>
+		</div>
+	</form>
+</ui:component>
+</html>

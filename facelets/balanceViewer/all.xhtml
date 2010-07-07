@@ -1,0 +1,40 @@
+<html
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:c="http://xmlns.idega.com/com.idega.core"
+		xmlns:f="http://java.sun.com/jsf/core"
+>
+<ui:component>
+	<form class="telecomBalanceViewer" action="" method="post">
+		<div class="formItem">
+			<label for="prm_from_date"><h:outputText value="#{localizedStrings['com.idega.telecom']['balance_viewer.from_date']}" /></label>
+			<c:datePicker inputName="prm_from_date" initialDate="#{telecomBean.fromDate}" />
+		</div>
+		<div class="formItem">
+			<label for="prm_to_date"><h:outputText value="#{localizedStrings['com.idega.telecom']['balance_viewer.to_date']}" /></label>
+			<c:datePicker inputName="prm_to_date" initialDate="#{telecomBean.toDate}" />
+		</div>
+		<div class="submit">
+			<a href="#"><span><h:outputText value="#{localizedStrings['com.idega.telecom']['balance_viewer.get_usage']}" /></span></a>
+		</div>
+	</form>
+	
+	<div class="usageEntries">
+		<div class="entryHeaders">
+			<span class="usage"><h:outputText value="#{localizedStrings['com.idega.telecom']['balance_viewer.usage']}" /></span>
+			<span class="total"><h:outputText value="#{localizedStrings['com.idega.telecom']['balance_viewer.total']}" /></span>
+		</div>
+
+		<ui:repeat value="#{telecomBean.entries}" var="entry">
+			<div class="usageEntry">
+				<span class="usage"><h:outputText value="#{entry.entryType}" /></span>
+				<span class="total">
+					<h:outputText value="#{entry.amount}">
+						<f:convertNumber type="currency" minFractionDigits="2" currencyCode="ISK"/>
+					</h:outputText>
+				</span>
+			</div>
+		</ui:repeat>
+	</div>
+</ui:component>
+</html>
