@@ -384,7 +384,13 @@ public class RatorServices implements TelecomServices {
 		entry.setOriginPhoneNumber(wsUsageEntry.getOriginPhoneNumber());
 		entry.setRecipientCountry(wsUsageEntry.getRecipientCountry());
 		//entry.setRecipientPhoneNumber(wsUsageEntry.get);
-		entry.setUsageDate(new IWTimestamp(wsUsageEntry.getUsageDate()).getTimestamp());
+		SimpleDateFormat sdfDestination = new SimpleDateFormat("dd.MM.yyyy hh:mm:ss");
+		try {
+			entry.setUsageDate(new IWTimestamp(sdfDestination.parse(wsUsageEntry.getUsageDate())).getTimestamp());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return entry;
 	}
