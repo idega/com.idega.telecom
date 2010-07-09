@@ -4,7 +4,9 @@ import java.rmi.RemoteException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
@@ -108,10 +110,9 @@ public class RatorServices implements TelecomServices {
 		return null;
 	}
 
-	public List<UsageEntry> getUsageEntriesByNumber(String number,
-			String fromDate, String toDate) {
-		List<UsageEntry> entries = new ArrayList<UsageEntry>();
-
+	public Map<String, List<UsageEntry>> getUsageEntriesByNumber(String number, String fromDate, String toDate) {
+		Map<String, List<UsageEntry>> map = new HashMap<String, List<UsageEntry>>();
+		
 		IWTimestamp from = new IWTimestamp(fromDate);
 		IWTimestamp to = new IWTimestamp(toDate);
 		try {
@@ -121,13 +122,18 @@ public class RatorServices implements TelecomServices {
 			if (wsEntries != null && wsEntries.length != 0) {
 				for (int i = 0; i < wsEntries.length; i++) {
 					UsageEntry entry = convertWSUsageEntryToUsageEntry(wsEntries[i]);
+					List<UsageEntry> entries = map.get(entry.getEntryType());
+					if (entries == null) {
+						entries = new ArrayList<UsageEntry>();
+					}
 					entries.add(entry);
+					map.put(entry.getEntryType(), entries);
 				}
 			}
 		} catch (RemoteException e) {
 		}
 
-		return entries;
+		return map;
 	}
 
 	public List<UsageEntry> getUsageEntriesByNumberAndType(String number,
@@ -154,9 +160,9 @@ public class RatorServices implements TelecomServices {
 		return entries;
 	}
 
-	public List<UsageEntry> getUsageEntriesByPersonalId(String personalId,
+	public Map<String, List<UsageEntry>> getUsageEntriesByPersonalId(String personalId,
 			String fromDate, String toDate) {
-		List<UsageEntry> entries = new ArrayList<UsageEntry>();
+		Map<String, List<UsageEntry>> map = new HashMap<String, List<UsageEntry>>();
 
 		IWTimestamp from = new IWTimestamp(fromDate);
 		IWTimestamp to = new IWTimestamp(toDate);
@@ -167,13 +173,18 @@ public class RatorServices implements TelecomServices {
 			if (wsEntries != null && wsEntries.length != 0) {
 				for (int i = 0; i < wsEntries.length; i++) {
 					UsageEntry entry = convertWSUsageEntryToUsageEntry(wsEntries[i]);
+					List<UsageEntry> entries = map.get(entry.getEntryType());
+					if (entries == null) {
+						entries = new ArrayList<UsageEntry>();
+					}
 					entries.add(entry);
+					map.put(entry.getEntryType(), entries);
 				}
 			}
 		} catch (RemoteException e) {
 		}
 
-		return entries;
+		return map;
 	}
 
 	public List<UsageEntry> getUsageEntriesByPersonalIdAndType(
@@ -336,7 +347,7 @@ public class RatorServices implements TelecomServices {
 		Phone phone = new Phone();
 		phone.setAutoRefill(wsPhone.getAutoRefill() != null);
 		phone.setAutoRefillAmount(wsPhone.getAutoRefillAmount());
-		phone.setBalance(Float.toString(wsPhone.getBalance()));
+		phone.setBalance(wsPhone.getBalance());
 		phone.setBillReceiverPersonalId(wsPhone.getBillReceiverPersonalID());
 		phone.setCreditCardCVC(wsPhone.getCreditCardCVC());
 		phone.setCreditCardExpiryMonth(wsPhone.getCreditCardExpiryMonth());
@@ -372,7 +383,7 @@ public class RatorServices implements TelecomServices {
 
 	private UsageEntry convertWSUsageEntryToUsageEntry(com.idega.telecom.webservice.client.UsageEntry wsUsageEntry) {
 		UsageEntry entry = new UsageEntry();
-		entry.setAmount(Float.toString(wsUsageEntry.getAmount()));
+		entry.setAmount(wsUsageEntry.getAmount());
 		//entry.setBillName(wsUsageEntry.g);
 		entry.setCountryOfOrigin(wsUsageEntry.getCountryOfOrigin());
 		entry.setDescription(wsUsageEntry.getDescription());

@@ -2,6 +2,7 @@ package com.idega.telecom.business;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import com.idega.telecom.services.bean.UsageEntry;
 public class TelecomBean {
 
 	private List<UsageEntry> entries;
+	private Map<String, List<UsageEntry>> entriesMap;
 	private Date fromDate;
 	private Date toDate;
 
@@ -22,6 +24,14 @@ public class TelecomBean {
 
 	public void setEntries(List<UsageEntry> entries) {
 		this.entries = entries;
+	}
+
+	public Map<String, List<UsageEntry>> getEntriesMap() {
+		return entriesMap;
+	}
+
+	public void setEntriesMap(Map<String, List<UsageEntry>> entriesMap) {
+		this.entriesMap = entriesMap;
 	}
 
 	public Date getFromDate() {

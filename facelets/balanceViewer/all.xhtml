@@ -27,12 +27,27 @@
 
 		<ui:repeat value="#{telecomBean.entries}" var="entry">
 			<div class="usageEntry">
-				<span class="usage"><h:outputText value="#{entry.entryType}" /></span>
+				<span class="usage"><h:outputText value="#{entry.number} #{entry.entryType}" /></span>
 				<span class="total">
 					<h:outputText value="#{entry.amount}">
 						<f:convertNumber type="currency" minFractionDigits="2" currencyCode="ISK"/>
 					</h:outputText>
 				</span>
+				
+				<div class="subEntries">
+					<ui:repeat value="#{telecomBean.entriesMap[entry.entryType]}" var="subEntry">
+						<div class="subEntry">
+							<span class="date"><h:outputText value="#{subEntry.usageDate}" /></span>
+							<span class="description"><h:outputText value="#{subEntry.description}" /></span>
+							<span class="duration"><h:outputText value="#{subEntry.duration}" /></span>
+							<span class="amount">
+								<h:outputText value="#{subEntry.amount}">
+									<f:convertNumber type="currency" minFractionDigits="2" currencyCode="ISK"/>
+								</h:outputText>
+							</span>
+						</div>
+					</ui:repeat>
+				</div>
 			</div>
 		</ui:repeat>
 	</div>

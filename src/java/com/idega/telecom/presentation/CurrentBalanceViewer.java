@@ -1,6 +1,9 @@
 package com.idega.telecom.presentation;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import javax.faces.context.FacesContext;
 
@@ -9,6 +12,7 @@ import com.idega.presentation.IWContext;
 import com.idega.presentation.ui.handlers.IWDatePickerHandler;
 import com.idega.telecom.business.TelecomBean;
 import com.idega.telecom.services.bean.Phone;
+import com.idega.telecom.services.bean.UsageEntry;
 import com.idega.util.IWTimestamp;
 import com.idega.util.PresentationUtil;
 
@@ -36,8 +40,28 @@ public class CurrentBalanceViewer extends TelecomBlock {
 				toDate = stamp.getDate();
 			}
 			
+			
+			Map<String, List<UsageEntry>> map = getTelecomServices().getUsageEntriesByNumber(phone.getNumber(), new IWTimestamp(fromDate).toSQLDateString(), new IWTimestamp(toDate).toSQLDateString());
+			List<UsageEntry> entries = new ArrayList<UsageEntry>();
+			for (String entryType : map.keySet()) {
+				List<UsageEntry> typeEntries = map.get(entryType);
+				
+				int count = typeEntries.size();
+				float total = 0;
+				for (UsageEntry usageEntry : typeEntries) {
+					total += usageEntry.getAmount();
+				}
+				
+				UsageEntry entry = new UsageEntry();
+				entry.setAmount(total);
+				entry.setEntryType(entryType);
+				entry.setNumber(Integer.toString(count));
+				entries.add(entry);
+			}
+			
 			TelecomBean bean = getBeanInstance("telecomBean");
-			bean.setEntries(getTelecomServices().getUsageEntriesByNumber(phone.getNumber(), new IWTimestamp(fromDate).toSQLDateString(), new IWTimestamp(toDate).toSQLDateString()));
+			bean.setEntries(entries);
+			bean.setEntriesMap(map);
 			bean.setFromDate(fromDate);
 			bean.setToDate(toDate);
 

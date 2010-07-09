@@ -14,7 +14,7 @@ public class Phone implements Serializable {
 	private String billReceiverPersonalId;
 	private String pin1;
 	private String puk1;
-	private String balance;
+	private float balance;
 	
 	//	prepaid, postpaid
 	private String serviceType;
@@ -84,11 +84,11 @@ public class Phone implements Serializable {
 		this.puk1 = puk1;
 	}
 
-	public String getBalance() {
+	public float getBalance() {
 		return balance;
 	}
 
-	public void setBalance(String balance) {
+	public void setBalance(float balance) {
 		this.balance = balance;
 	}
 

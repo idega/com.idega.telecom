@@ -1,0 +1,29 @@
+#contentContainer #content .content {
+	background: transparent !important;
+	padding: 0 !important;
+}
+
+#contentContainer #content .left {
+	display: none !important;
+}
+
+#contentContainer .shader {
+	display: none;
+}
+
+.blog-entry-body ul {
+	margin: 0;
+	padding: 3px 0;
+	list-style: none;
+	width: 586px;
+	overflow: hidden;
+}
+
+.blog-entry-body ul li {
+	float: left;
+	margin: 3px 4px;
+}
+
+.blog-entry-title {
+	display: none;
+}

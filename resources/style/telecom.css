@@ -1,1 +1,18 @@
 @CHARSET "UTF-8";
+div.unlockCodes {
+	border: 1px #f26522 solid;
+	padding: 8px 10px;
+	float: left;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+div.unlockCodes label {
+	float: left;
+	width: 80px;
+	font-weight: bold;
+}
+
+div.unlockCodes span {
+	color: #f26522;
+}

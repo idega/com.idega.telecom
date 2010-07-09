@@ -3,7 +3,7 @@ var $j = jQuery.noConflict();
 $j(document).ready(function() {
 	$j('input.enableService').click(function() {
 		var item = $j(this);
-		var name = item.getAttr('name');
+		var name = item.attr('name');
 		var value = item.val();
 		
 		TelecomSession.getPhone({

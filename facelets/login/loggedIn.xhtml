@@ -13,6 +13,7 @@
 		<p class="phoneNumber"><h:outputText value="#{telecomSession.phone.number}" /></p>
 		<p class="balance">
 			<h:outputText value="#{localizedStrings['com.idega.telecom']['login.balance']}" />
+			<h:outputText value="&#160;" />
 			<h:outputText value="#{telecomSession.phone.balance}">
 				<f:convertNumber type="currency" minFractionDigits="2" currencyCode="ISK"/>
 			</h:outputText>

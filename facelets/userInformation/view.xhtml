@@ -1,0 +1,44 @@
+<html
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:c="http://xmlns.idega.com/com.idega.core"
+		xmlns:a="http://xmlns.idega.com/is.idega.idegaweb.egov.application"
+>
+<ui:component>
+	<form class="userInformation" action="" method="post">
+		<div class="formItem">
+			<label for="prm_personal_id"><h:outputText value="#{localizedStrings['com.idega.telecom']['user_information.personal_id']}" /></label>
+			<c:textInput name="prm_personal_id" disabled="true" content="#{telecomSession.user.personalId}" />
+		</div>
+		<div class="formItem">
+			<label for="prm_name"><h:outputText value="#{localizedStrings['com.idega.telecom']['user_information.name']}" /></label>
+			<c:textInput name="prm_name" content="#{telecomSession.user.name}" />
+		</div>
+		<div class="formItem">
+			<label for="prm_address"><h:outputText value="#{localizedStrings['com.idega.telecom']['user_information.address']}" /></label>
+			<c:textInput name="prm_address" content="#{telecomSession.user.streetAndNumber}" />
+		</div>
+		<div class="formItem">
+			<label for="prm_postal_code"><h:outputText value="#{localizedStrings['com.idega.telecom']['user_information.postal']}" /></label>
+			<c:textInput styleClass="postalCode" name="prm_postal_code" content="#{telecomSession.user.zip}" />
+			<c:textInput styleClass="postalAddress" name="prm_postal_address" content="#{telecomSession.user.city}" />
+		</div>
+		<div class="formItem">
+			<label for="prm_home_phone"><h:outputText value="#{localizedStrings['com.idega.telecom']['user_information.home_phone']}" /></label>
+			<c:textInput name="prm_home_phone" content="#{telecomSession.user.homePhone}" />
+		</div>
+		<div class="formItem">
+			<label for="prm_email"><h:outputText value="#{localizedStrings['com.idega.telecom']['user_information.email']}" /></label>
+			<c:textInput name="prm_email" content="#{telecomSession.user.email}" />
+		</div>
+		<div class="formItem">
+			<label for="prm_email"><h:outputText value="#{localizedStrings['com.idega.telecom']['user_information.email_confirm']}" /></label>
+			<c:textInput name="prm_email" />
+		</div>
+		
+		<div class="buttonLayer">
+			<a href="#"><span><h:outputText value="#{localizedStrings['com.idega.telecom']['user_information.save']}" /></span></a>
+		</div>
+	</form>
+</ui:component>
+</html>

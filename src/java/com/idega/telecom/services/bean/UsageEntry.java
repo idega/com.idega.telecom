@@ -17,7 +17,7 @@ public class UsageEntry implements Serializable {
 	private String recipientPhoneNumber;
 	private String countryOfOrigin;
 	private String recipientCountry;
-	private String amount;
+	private float amount;
 	private String duration;
 	private String entryType;
 	
@@ -93,11 +93,11 @@ public class UsageEntry implements Serializable {
 		this.recipientCountry = recipientCountry;
 	}
 
-	public String getAmount() {
+	public float getAmount() {
 		return amount;
 	}
 
-	public void setAmount(String amount) {
+	public void setAmount(float amount) {
 		this.amount = amount;
 	}
 
