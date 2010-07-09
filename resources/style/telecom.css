@@ -1,4 +1,59 @@
 @CHARSET "UTF-8";
+form.telecomLogin div.formItem {
+	color: #fff;
+	font-size: 0.75em;
+	margin-bottom: 6px;
+}
+
+form.telecomLogin p {
+	font-size: 0.75em;
+	color: #fff;
+	margin: 0;
+}
+
+form.telecomLogin p.user {
+	font-weight: bold;
+}
+
+form.telecomLogin p.balance {
+	margin-top: 8px;
+	font-weight: bold;
+}
+
+form.telecomLogin div.submit, form.userInformation div.buttonLayer {
+	width: 100%;
+	overflow: hidden;
+}
+
+form.telecomLogin.loggedIn div.submit, form.telecomLogin.loginFailed div.submit {
+	margin-top: 12px;
+}
+
+form.userInformation div.buttonLayer {
+	margin-top: 6px;
+}
+
+form.telecomLogin div.submit a, form.userInformation div.buttonLayer a, form.telecomBalanceViewer div.submit a {
+	display: block;
+	border: 1px #999 solid;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	background-color: #000;
+	color: #fff;
+	font-size: 0.6875em;
+	padding: 2px 12px;
+	text-decoration: none;
+	float: right;
+	font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;
+}
+
+form.userInformation div.buttonLayer a {
+	border-color: #666;
+	float: left;
+	margin-left: 150px;
+}
+
 div.unlockCodes {
 	border: 1px #f26522 solid;
 	padding: 8px 10px;
@@ -15,4 +70,178 @@ div.unlockCodes label {
 
 div.unlockCodes span {
 	color: #f26522;
+}
+
+form.userInformation div.formItem {
+	font-size: 0.75em;
+	font-weight: bold;
+	width: auto;
+	overflow: hidden;
+	margin-bottom: 2px;
+}
+
+form.userInformation div.formItem label {
+	float: left;
+	width: 150px;
+	line-height: 22px;
+}
+
+form.userInformation div.formItem input {
+	border: 1px #ccc solid;
+	color: #333;
+	padding: 3px 4px;
+	width: 240px;
+	margin: 0;
+	float: left;
+}
+
+form.userInformation div.formItem input.postalCode {
+	width: 50px;
+	margin-right: 2px;
+}
+
+form.userInformation div.formItem input.postalAddress {
+	width: 178px;
+}
+
+table.specialServices {
+	font-size: 0.75em;
+}
+
+table.specialServices thead tr th {
+	background-color: #e6e6e6;
+	padding: 3px 5px;
+	text-align: left;
+}
+
+table.specialServices tbody tr td {
+	border-bottom: 1px #e6e6e6 solid;
+	padding: 3px 5px;
+}
+
+table.specialServices tbody tr td span.description {
+	display: block;
+	width: 16px;
+	height: 16px;
+	background: url(images/info.gif) top left no-repeat;
+}
+
+form.telecomBalanceViewer {
+	width: 100%;
+	overflow: hidden;
+	margin-bottom: 12px;
+}
+
+form.telecomBalanceViewer div.formItem {
+	font-size: 0.75em;
+	float: left;
+	margin-right: 12px;
+}
+
+form.telecomBalanceViewer div.formItem label {
+	float: left;
+	line-height: 20px;
+	font-weight: bold;
+	margin-right: 4px;
+}
+
+form.telecomBalanceViewer div.formItem input {
+	border: 1px #ccc solid;
+	width: 70px;
+	margin: 0;
+	float: left;
+	padding: 2px 3px;
+	margin-right: 1px;
+}
+
+form.telecomBalanceViewer div.submit {
+	float: left;
+}
+
+form.telecomBalanceViewer div.submit a {
+	font-size: 0.6875em;
+}
+
+div.usageEntries {
+	font-size: 0.75em;
+}
+
+div.usageEntries div.entryHeaders {
+	background-color: #e6e6e6;
+	padding: 3px 5px;
+	padding-left: 20px;
+	font-weight: bold;
+}
+
+div.usageEntries div.entryHeaders span.total {
+	float: right;
+}
+
+div.usageEntries div.usageEntry {
+	width: auto;
+	overflow: hidden;
+	padding: 3px 5px;
+	border-bottom: 1px #e6e6e6 solid;
+}
+
+div.usageEntries div.usageEntry span.expander {
+	width: 9px;
+	margin-right: 6px;
+	margin-top: 3px;
+	height: 9px;
+	float: left;
+	background: url(images/plus.gif) left center no-repeat; 
+	cursor: pointer;
+}
+
+div.usageEntries div.usageEntry span.expander.open {
+	background-image: url(images/minus.gif);
+}
+
+div.usageEntries div.usageEntry span.total {
+	float: right;
+}
+
+div.usageEntries div.usageEntry div.subEntries {
+	display: none;
+	margin: 8px -5px 8px 14px;
+	border-top: 1px #e6e6e6 solid;
+}
+
+div.usageEntries div.usageEntry div.subEntries div.subEntries {
+	margin-right: 0;
+}
+
+div.usageEntries div.usageEntry table.subEntries {
+	display: none;
+	margin-left: 14px;
+	margin-top: 3px;
+	margin-bottom: -4px;
+	width: 507px;
+}
+
+div.usageEntries div.usageEntry table.subEntries th {
+	background-color: #eaeaea;
+	text-align: left;
+	padding: 2px 5px;
+}
+
+div.usageEntries div.usageEntry table.subEntries td {
+	padding: 2px 5px;
+	border-bottom: 1px #eaeaea solid;
+}
+
+div.usageEntries div.usageEntry table.subEntries .amount {
+	text-align: right;
+}
+
+div.usageEntries div.usageEntry div.subEntries div.subEntry {
+	width: auto;
+	overflow: hidden;
+	padding: 3px 5px;
+	border-bottom: 1px #e6e6e6 solid;
+}
+
+div.usageEntries div.usageEntry div.subEntries div.subEntry span.amount {
+	float: right;
 }

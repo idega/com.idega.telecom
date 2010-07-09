@@ -134,7 +134,9 @@ public class RatorServices implements TelecomServices {
 
 		for (int i = 0; i < wsEntries.length; i++) {
 			UsageEntry entry = convertWSUsageEntryToUsageEntry(wsEntries[i]);
-			Map<UsageEntry, List<UsageEntry>> valueEntries = map.get(entry);
+			UsageEntry keyEntry = new UsageEntry();
+			keyEntry.setEntryType(entry.getEntryType());
+			Map<UsageEntry, List<UsageEntry>> valueEntries = map.get(keyEntry);
 			List<UsageEntry> usageEntries = null;
 			if (valueEntries == null) {
 				valueEntries = new HashMap<UsageEntry, List<UsageEntry>>();
@@ -142,13 +144,13 @@ public class RatorServices implements TelecomServices {
 			} else {
 				usageEntries = valueEntries.get(entry);
 				if (usageEntries == null) {
-					usageEntries = new ArrayList<UsageEntry>();					
+					usageEntries = new ArrayList<UsageEntry>();
 				}
 			}
 			usageEntries.add(entry);
 			valueEntries.put(entry, usageEntries);
-			
-			map.put(entry, valueEntries);
+
+			map.put(keyEntry, valueEntries);
 		}
 
 		createTotalsForMap(map);

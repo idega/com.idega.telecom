@@ -2,6 +2,7 @@ package com.idega.telecom.presentation;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,29 +42,17 @@ public class CurrentBalanceViewer extends TelecomBlock {
 			}
 			
 			Map<UsageEntry, Map<UsageEntry, List<UsageEntry>>> map = getTelecomServices().getUsageEntriesByNumber(phone.getNumber(), new IWTimestamp(fromDate).toSQLDateString(), new IWTimestamp(toDate).toSQLDateString());
-			Map<UsageEntry, List<UsageEntry>> innerMap = null;
-			List<UsageEntry> entries = null;
+			List<UsageEntry> keys = new ArrayList(map.keySet());
 			
-			for (UsageEntry entryType : map.keySet()) {
-				/*List<UsageEntry> typeEntries = map.get(entryType);
-				
-				int count = typeEntries.size();
-				float total = 0;
-				for (UsageEntry usageEntry : typeEntries) {
-					total += usageEntry.getAmount();
-				}
-				
-				UsageEntry entry = new UsageEntry();
-				entry.setAmount(total);
-				entry.setEntryType(entryType);
-				entry.setNumber(Integer.toString(count));
-				entries.add(entry);*/
+			Map<UsageEntry, List<UsageEntry>> entries = new HashMap<UsageEntry, List<UsageEntry>>();
+			for (UsageEntry usageEntry : keys) {
+				entries.put(usageEntry, new ArrayList(map.get(usageEntry).keySet()));
 			}
 			
-			
 			TelecomBean bean = getBeanInstance("telecomBean");
-			bean.setEntries(entries);
-			bean.setEntriesMap(map);
+			bean.setEntries(keys);
+			bean.setEntriesMap(entries);
+			bean.setSubEntriesMap(map);
 			bean.setFromDate(fromDate);
 			bean.setToDate(toDate);
 

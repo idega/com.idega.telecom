@@ -14,7 +14,8 @@ import com.idega.telecom.services.bean.UsageEntry;
 public class TelecomBean {
 
 	private List<UsageEntry> entries;
-	private Map<UsageEntry, Map<UsageEntry, List<UsageEntry>>> entriesMap;
+	private Map<UsageEntry, List<UsageEntry>> entriesMap;
+	private Map<UsageEntry, Map<UsageEntry, List<UsageEntry>>> subEntriesMap;
 	private Date fromDate;
 	private Date toDate;
 
@@ -26,12 +27,20 @@ public class TelecomBean {
 		this.entries = entries;
 	}
 
-	public Map<UsageEntry, Map<UsageEntry, List<UsageEntry>>> getEntriesMap() {
+	public Map<UsageEntry, List<UsageEntry>> getEntriesMap() {
 		return entriesMap;
 	}
 
-	public void setEntriesMap(Map<UsageEntry, Map<UsageEntry, List<UsageEntry>>> entriesMap) {
+	public void setEntriesMap(Map<UsageEntry, List<UsageEntry>> entriesMap) {
 		this.entriesMap = entriesMap;
+	}
+
+	public Map<UsageEntry, Map<UsageEntry, List<UsageEntry>>> getSubEntriesMap() {
+		return subEntriesMap;
+	}
+
+	public void setSubEntriesMap(Map<UsageEntry, Map<UsageEntry, List<UsageEntry>>> subEntriesMap) {
+		this.subEntriesMap = subEntriesMap;
 	}
 
 	public Date getFromDate() {

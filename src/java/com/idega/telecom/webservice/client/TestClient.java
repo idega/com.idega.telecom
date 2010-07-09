@@ -61,7 +61,7 @@ public class TestClient {
 
 			IWTimestamp today = new IWTimestamp();
 			IWTimestamp from = new IWTimestamp();
-			from.addDays(-1);
+			from.addDays(-14);
 
 			System.out.println("from = " + from.toString());
 			System.out.println("to = " + today.toString());

@@ -42,7 +42,7 @@ public class TelecomLogin extends TelecomBlock {
 		}
 		else if (iwc.isParameterSet(PARAMETER_LOGOUT)) {
 			getTelecomSession().setUser(null);
-			iwc.sendRedirect("/pages");
+			iwc.sendRedirect("/");
 		}
 		else {
 			user = getTelecomSession().getUser();			
