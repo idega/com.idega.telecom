@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
@@ -110,8 +111,8 @@ public class RatorServices implements TelecomServices {
 		return null;
 	}
 
-	public Map<String, List<UsageEntry>> getUsageEntriesByNumber(String number, String fromDate, String toDate) {
-		Map<String, List<UsageEntry>> map = new HashMap<String, List<UsageEntry>>();
+	public Map<UsageEntry, Map<UsageEntry, List<UsageEntry>>> getUsageEntriesByNumber(String number, String fromDate, String toDate) {
+		Map<UsageEntry, Map<UsageEntry, List<UsageEntry>>> map = null;
 		
 		IWTimestamp from = new IWTimestamp(fromDate);
 		IWTimestamp to = new IWTimestamp(toDate);
@@ -120,15 +121,7 @@ public class RatorServices implements TelecomServices {
 					.usageEntryGetByNumberAndDate(number, from.getCalendar(),
 							to.getCalendar());
 			if (wsEntries != null && wsEntries.length != 0) {
-				for (int i = 0; i < wsEntries.length; i++) {
-					UsageEntry entry = convertWSUsageEntryToUsageEntry(wsEntries[i]);
-					List<UsageEntry> entries = map.get(entry.getEntryType());
-					if (entries == null) {
-						entries = new ArrayList<UsageEntry>();
-					}
-					entries.add(entry);
-					map.put(entry.getEntryType(), entries);
-				}
+				map = createMapFromWSUsageEntries(wsEntries);
 			}
 		} catch (RemoteException e) {
 		}
@@ -136,6 +129,67 @@ public class RatorServices implements TelecomServices {
 		return map;
 	}
 
+	private Map<UsageEntry, Map<UsageEntry, List<UsageEntry>>> createMapFromWSUsageEntries(com.idega.telecom.webservice.client.UsageEntry wsEntries[]) {
+		Map<UsageEntry, Map<UsageEntry, List<UsageEntry>>> map = new HashMap<UsageEntry, Map<UsageEntry, List<UsageEntry>>>();
+
+		for (int i = 0; i < wsEntries.length; i++) {
+			UsageEntry entry = convertWSUsageEntryToUsageEntry(wsEntries[i]);
+			Map<UsageEntry, List<UsageEntry>> valueEntries = map.get(entry);
+			List<UsageEntry> usageEntries = null;
+			if (valueEntries == null) {
+				valueEntries = new HashMap<UsageEntry, List<UsageEntry>>();
+				usageEntries = new ArrayList<UsageEntry>();
+			} else {
+				usageEntries = valueEntries.get(entry);
+				if (usageEntries == null) {
+					usageEntries = new ArrayList<UsageEntry>();					
+				}
+			}
+			usageEntries.add(entry);
+			valueEntries.put(entry, usageEntries);
+			
+			map.put(entry, valueEntries);
+		}
+
+		createTotalsForMap(map);
+		
+		return map;
+	}
+	
+	private void createTotalsForMap(
+			Map<UsageEntry, Map<UsageEntry, List<UsageEntry>>> map) {
+		Set<UsageEntry> key1 = map.keySet();
+		for (UsageEntry e : key1) {
+			float total = 0.0f;
+			int count = 0;
+
+			Map<UsageEntry, List<UsageEntry>> innerMap = map.get(e);
+			if (innerMap != null) {
+				Set<UsageEntry> key2 = innerMap.keySet();
+				for (UsageEntry e2 : key2) {
+					float innerTotal = 0.0f;
+					int innerCount = 0;
+					List<UsageEntry> entries = innerMap.get(e2);
+					for (UsageEntry e3 : entries) {
+						innerTotal += e3.getAmount();
+						innerCount++;
+						total += e3.getAmount();
+						count++;
+					}
+
+					e2.setAmount(innerTotal);
+					e2.setDuration(Integer.toString(innerCount));
+					innerMap.put(e2, entries);
+				}
+
+				e.setAmount(total);
+				e.setDuration(Integer.toString(count));
+				map.put(e, innerMap);
+			}
+		}
+	}
+
+	
 	public List<UsageEntry> getUsageEntriesByNumberAndType(String number,
 			String fromDate, String toDate, String type) {
 		List<UsageEntry> entries = new ArrayList<UsageEntry>();
@@ -160,9 +214,9 @@ public class RatorServices implements TelecomServices {
 		return entries;
 	}
 
-	public Map<String, List<UsageEntry>> getUsageEntriesByPersonalId(String personalId,
+	public Map<UsageEntry, Map<UsageEntry, List<UsageEntry>>> getUsageEntriesByPersonalId(String personalId,
 			String fromDate, String toDate) {
-		Map<String, List<UsageEntry>> map = new HashMap<String, List<UsageEntry>>();
+		Map<UsageEntry, Map<UsageEntry, List<UsageEntry>>> map = null;
 
 		IWTimestamp from = new IWTimestamp(fromDate);
 		IWTimestamp to = new IWTimestamp(toDate);
@@ -171,15 +225,7 @@ public class RatorServices implements TelecomServices {
 					.usageEntryGetByPersonalIdAndDate(personalId, from.getCalendar(),
 							to.getCalendar());
 			if (wsEntries != null && wsEntries.length != 0) {
-				for (int i = 0; i < wsEntries.length; i++) {
-					UsageEntry entry = convertWSUsageEntryToUsageEntry(wsEntries[i]);
-					List<UsageEntry> entries = map.get(entry.getEntryType());
-					if (entries == null) {
-						entries = new ArrayList<UsageEntry>();
-					}
-					entries.add(entry);
-					map.put(entry.getEntryType(), entries);
-				}
+				map = createMapFromWSUsageEntries(wsEntries);
 			}
 		} catch (RemoteException e) {
 		}

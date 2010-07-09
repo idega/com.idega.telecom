@@ -40,11 +40,12 @@ public class CurrentBalanceViewer extends TelecomBlock {
 				toDate = stamp.getDate();
 			}
 			
+			Map<UsageEntry, Map<UsageEntry, List<UsageEntry>>> map = getTelecomServices().getUsageEntriesByNumber(phone.getNumber(), new IWTimestamp(fromDate).toSQLDateString(), new IWTimestamp(toDate).toSQLDateString());
+			Map<UsageEntry, List<UsageEntry>> innerMap = null;
+			List<UsageEntry> entries = null;
 			
-			Map<String, List<UsageEntry>> map = getTelecomServices().getUsageEntriesByNumber(phone.getNumber(), new IWTimestamp(fromDate).toSQLDateString(), new IWTimestamp(toDate).toSQLDateString());
-			List<UsageEntry> entries = new ArrayList<UsageEntry>();
-			for (String entryType : map.keySet()) {
-				List<UsageEntry> typeEntries = map.get(entryType);
+			for (UsageEntry entryType : map.keySet()) {
+				/*List<UsageEntry> typeEntries = map.get(entryType);
 				
 				int count = typeEntries.size();
 				float total = 0;
@@ -56,8 +57,9 @@ public class CurrentBalanceViewer extends TelecomBlock {
 				entry.setAmount(total);
 				entry.setEntryType(entryType);
 				entry.setNumber(Integer.toString(count));
-				entries.add(entry);
+				entries.add(entry);*/
 			}
+			
 			
 			TelecomBean bean = getBeanInstance("telecomBean");
 			bean.setEntries(entries);

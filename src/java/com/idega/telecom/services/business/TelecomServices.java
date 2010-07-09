@@ -111,7 +111,7 @@ public interface TelecomServices {
 	 * @param toDate
 	 * @return
 	 */
-	public Map<String, List<UsageEntry>> getUsageEntriesByPersonalId(String personalId, String fromDate, String toDate);
+	public Map<UsageEntry, Map<UsageEntry, List<UsageEntry>>> getUsageEntriesByPersonalId(String personalId, String fromDate, String toDate);
 	
 	/**
 	 * Gets all entries for this phone number
@@ -120,7 +120,7 @@ public interface TelecomServices {
 	 * @param toDate
 	 * @return
 	 */
-	public Map<String, List<UsageEntry>> getUsageEntriesByNumber(String number, String fromDate, String toDate);
+	public Map<UsageEntry, Map<UsageEntry, List<UsageEntry>>> getUsageEntriesByNumber(String number, String fromDate, String toDate);
 	
 	/**
 	 * Gets all entries of the specified type for all phones of the specified user (by personalId)
