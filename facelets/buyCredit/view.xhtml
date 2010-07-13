@@ -1,0 +1,53 @@
+<html
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:co="http://java.sun.com/jstl/core"
+		xmlns:c="http://xmlns.idega.com/com.idega.core"
+		xmlns:a="http://xmlns.idega.com/is.idega.idegaweb.egov.application"
+>
+<ui:component>
+	<form class="buyCredit" action="" method="post">
+		<input type="hidden" name="prm_action" value="true" />
+	
+		<div class="formItem">
+			<label for="prm_amount"><h:outputText value="#{localizedStrings['com.idega.telecom']['buy_credit.amount']}" /></label>
+			<select name="prm_amount">
+				<option value="500">500</option>
+				<option value="1000">1000</option>
+				<option value="2000">2000</option>
+				<option value="3000">3000</option>
+				<option value="5000">5000</option>
+				<option value="10000">10000</option>
+			</select>
+		</div>
+		<div class="formItem">
+			<label for="prm_credit_card_number"><h:outputText value="#{localizedStrings['com.idega.telecom']['buy_credit.card_number']}" /></label>
+			<c:textInput name="prm_credit_card_number" length="4" />
+			<c:textInput name="prm_credit_card_number" length="4" />
+			<c:textInput name="prm_credit_card_number" length="4" />
+			<c:textInput name="prm_credit_card_number" length="4" />
+		</div>
+		<div class="formItem">
+			<label for="prm_month"><h:outputText value="#{localizedStrings['com.idega.telecom']['buy_credit.card_validity']}" /></label>
+			<select name="prm_month">
+				<co:forEach var="i" begin="1" end="12">
+					<option value="#{i}">#{i}</option>
+				</co:forEach>
+			</select>
+			<select name="prm_year">
+				<co:forEach var="i" begin="#{telecomBean.startYear" end="#{telecomBean.endYear}">
+					<option value="#{i}">#{i}</option>
+				</co:forEach>
+			</select>
+		</div>
+		<div class="formItem">
+			<label for="prm_cvc_number"><h:outputText value="#{localizedStrings['com.idega.telecom']['buy_credit.cvc_number']}" /></label>
+			<c:textInput styleClass="prm_cvc_number" length="3" />
+		</div>
+		
+		<div class="buttonLayer">
+			<a href="#"><span><h:outputText value="#{localizedStrings['com.idega.telecom']['buy_credit.cvc_number']}" /></span></a>
+		</div>
+	</form>
+</ui:component>
+</html>

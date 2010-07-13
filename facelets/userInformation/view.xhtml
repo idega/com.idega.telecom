@@ -6,6 +6,8 @@
 >
 <ui:component>
 	<form class="userInformation" action="" method="post">
+		<input type="hidden" name="prm_action" value="true" />
+
 		<div class="formItem">
 			<label for="prm_personal_id"><h:outputText value="#{localizedStrings['com.idega.telecom']['user_information.personal_id']}" /></label>
 			<c:textInput name="prm_personal_id" disabled="true" content="#{telecomSession.user.personalId}" />

@@ -1,0 +1,29 @@
+<html
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:c="http://xmlns.idega.com/com.idega.core"
+		xmlns:a="http://xmlns.idega.com/is.idega.idegaweb.egov.application"
+>
+<ui:component>
+	<form class="changePassword" action="" method="post">
+		<input type="hidden" name="prm_action" value="true" />
+	
+		<div class="formItem">
+			<label for="prm_old_password"><h:outputText value="#{localizedStrings['com.idega.telecom']['change_password.current_password']}" /></label>
+			<c:textInput name="prm_old_password" />
+		</div>
+		<div class="formItem">
+			<label for="prm_new_password"><h:outputText value="#{localizedStrings['com.idega.telecom']['change_password.new_password']}" /></label>
+			<c:textInput name="prm_new_password" />
+		</div>
+		<div class="formItem">
+			<label for="prm_new_password"><h:outputText value="#{localizedStrings['com.idega.telecom']['change_password.new_password_confirm']}" /></label>
+			<c:textInput styleClass="prm_new_password" />
+		</div>
+		
+		<div class="buttonLayer">
+			<a href="#"><span><h:outputText value="#{localizedStrings['com.idega.telecom']['change_password.save']}" /></span></a>
+		</div>
+	</form>
+</ui:component>
+</html>

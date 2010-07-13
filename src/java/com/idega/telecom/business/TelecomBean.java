@@ -18,6 +18,9 @@ public class TelecomBean {
 	private Map<UsageEntry, Map<UsageEntry, List<UsageEntry>>> subEntriesMap;
 	private Date fromDate;
 	private Date toDate;
+	
+	private int startYear;
+	private int endYear;
 
 	public List<UsageEntry> getEntries() {
 		return entries;
@@ -57,5 +60,21 @@ public class TelecomBean {
 
 	public void setToDate(Date toDate) {
 		this.toDate = toDate;
+	}
+
+	public int getStartYear() {
+		return startYear;
+	}
+
+	public void setStartYear(int startYear) {
+		this.startYear = startYear;
+	}
+
+	public int getEndYear() {
+		return endYear;
+	}
+
+	public void setEndYear(int endYear) {
+		this.endYear = endYear;
 	}
 }

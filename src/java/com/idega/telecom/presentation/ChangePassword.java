@@ -4,10 +4,10 @@ import javax.faces.context.FacesContext;
 
 import com.idega.facelets.ui.FaceletComponent;
 import com.idega.presentation.IWContext;
+import com.idega.util.PresentationUtil;
 
 public class ChangePassword extends TelecomBlock {
 	
-	private static final String PARAMETER_USERNAME = "prm_username";
 	private static final String PARAMETER_OLD_PASSWORD = "prm_old_password";
 	private static final String PARAMETER_NEW_PASSWORD = "prm_new_password";
 
@@ -24,16 +24,18 @@ public class ChangePassword extends TelecomBlock {
 	}
 	
 	private void view(IWContext iwc) {
+		PresentationUtil.addJavaScriptSourceLineToHeader(iwc, getJQuery().getBundleURIToJQueryLib());
+		PresentationUtil.addJavaScriptSourceLineToHeader(iwc, getBundle().getVirtualPathWithFileNameString("javascript/changePassword.js"));
+
 		FaceletComponent facelet = (FaceletComponent) iwc.getApplication().createComponent(FaceletComponent.COMPONENT_TYPE);
 		facelet.setFaceletURI(getBundle().getFaceletURI("changePassword/view.xhtml"));
 		add(facelet);
 	}
 
 	private void save(IWContext iwc) {
-		String userName = iwc.getParameter(PARAMETER_USERNAME);
 		String oldPassword = iwc.getParameter(PARAMETER_OLD_PASSWORD);
 		String newPassword = iwc.getParameter(PARAMETER_NEW_PASSWORD);
 		
-		getTelecomServices().updateUserLogin(userName, oldPassword, newPassword);
+		getTelecomServices().updateUserLogin(null, oldPassword, newPassword);
 	}
 }

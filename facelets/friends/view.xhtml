@@ -1,0 +1,25 @@
+<html
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:co="http://java.sun.com/jstl/core"
+		xmlns:c="http://xmlns.idega.com/com.idega.core"
+		xmlns:a="http://xmlns.idega.com/is.idega.idegaweb.egov.application"
+>
+<ui:component>
+	<form class="friends" action="" method="post">
+		<input type="hidden" name="prm_action" value="true" />
+	
+		<co:forEach var="i" begin="1" end="6">
+			<div class="formItem">
+				<label for="prm_friend_number"><h:outputText value="#{localizedStrings['com.idega.telecom']['friends.friend_number']} #{i}" /></label>
+				<c:textInput name="prm_friend_number" content="#{telecomSession.phone.friendNumbers[i-1].friendNumber}" />
+				<em><h:outputText value="#{telecomSession.phone.friendNumbers[i-1].lastChangedTimestamp}" /></em>
+			</div>
+		</co:forEach>
+		
+		<div class="buttonLayer">
+			<a href="#"><span><h:outputText value="#{localizedStrings['com.idega.telecom']['friends.save']}" /></span></a>
+		</div>
+	</form>
+</ui:component>
+</html>

@@ -14,7 +14,7 @@ public interface TelecomServices {
 
 	/**
 	 * Buys credit
-	 * @return “success” string if successful otherwise return errorCode
+	 * @return "success" string if successful otherwise return errorCode
 	 */
 	public String buyCredit(String phoneNumber, String creditCardNumber, String month, String year, String amount);
 	
@@ -29,7 +29,7 @@ public interface TelecomServices {
 	/**
 	 * This method should equally update users and owners
 	 * @param user
-	 * @return “success” if successfully updated user info if error occurred return error code or explanation
+	 * @return "success" if successfully updated user info if error occurred return error code or explanation
 	 */
 	public String updateUser(User user);
 	
