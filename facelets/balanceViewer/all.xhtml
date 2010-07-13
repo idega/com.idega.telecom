@@ -25,56 +25,65 @@
 			<span class="total"><h:outputText value="#{localizedStrings['com.idega.telecom']['balance_viewer.total']}" /></span>
 		</div>
 
-		<ui:repeat value="#{telecomBean.entries}" var="entry">
-			<div class="usageEntry">
-				<span class="expander"></span>
-				<span class="usage"><h:outputText value="#{entry.duration} #{entry.entryType}" /></span>
-				<span class="total">
-					<h:outputText value="#{entry.amount}">
-						<f:convertNumber type="currency" minFractionDigits="2" currencyCode="ISK"/>
-					</h:outputText>
-				</span>
-				
-				<div class="subEntries">
-					<ui:repeat value="#{telecomBean.entriesMap[entry]}" var="subEntry">
-						<div class="subEntry">
-							<span class="expander"></span>
-							<span class="usage"><h:outputText value="#{subEntry.duration} #{subEntry.description}" /></span>
-							<span class="amount">
-								<h:outputText value="#{subEntry.amount}">
-									<f:convertNumber type="currency" minFractionDigits="2" currencyCode="ISK"/>
-								</h:outputText>
-							</span>
-							
-							<table class="subEntries" cellpadding="0" cellspacing="0">
-								<thead>
-									<tr>
-										<th class="date"><h:outputText value="#{localizedStrings['com.idega.telecom']['balance_viewer.date']}" /></th>
-										<th class="description"><h:outputText value="#{localizedStrings['com.idega.telecom']['balance_viewer.description']}" /></th>
-										<th class="duration"><h:outputText value="#{localizedStrings['com.idega.telecom']['balance_viewer.length']}" /></th>
-										<th class="amount"><h:outputText value="#{localizedStrings['com.idega.telecom']['balance_viewer.amount']}" /></th>
-									</tr>
-								</thead>
-								<ui:repeat value="#{telecomBean.subEntriesMap[entry][subEntry]}" var="subSubEntry">
-									<tbody>
+		<ui:fragment rendered="#{not empty telecomBean.entries}">
+			<ui:repeat value="#{telecomBean.entries}" var="entry">
+				<div class="usageEntry">
+					<span class="expander"></span>
+					<span class="usage"><h:outputText value="#{entry.duration} #{entry.entryType}" /></span>
+					<span class="total">
+						<h:outputText value="#{entry.amount}">
+							<f:convertNumber type="currency" minFractionDigits="2" currencyCode="ISK"/>
+						</h:outputText>
+					</span>
+					
+					<div class="subEntries">
+						<ui:repeat value="#{telecomBean.entriesMap[entry]}" var="subEntry">
+							<div class="subEntry">
+								<span class="expander"></span>
+								<span class="usage"><h:outputText value="#{subEntry.duration} #{subEntry.description}" /></span>
+								<span class="amount">
+									<h:outputText value="#{subEntry.amount}">
+										<f:convertNumber type="currency" minFractionDigits="2" currencyCode="ISK"/>
+									</h:outputText>
+								</span>
+								
+								<table class="subEntries" cellpadding="0" cellspacing="0">
+									<thead>
 										<tr>
-											<td class="date"><h:outputText value="#{subSubEntry.usageDate}" /></td>
-											<td class="description"><h:outputText value="#{subSubEntry.description}" /></td>
-											<td class="duration"><h:outputText value="#{subSubEntry.duration}" /></td>
-											<td class="amount">
-												<h:outputText value="#{subSubEntry.amount}">
-													<f:convertNumber type="currency" minFractionDigits="2" currencyCode="ISK"/>
-												</h:outputText>
-											</td>
+											<th class="date"><h:outputText value="#{localizedStrings['com.idega.telecom']['balance_viewer.date']}" /></th>
+											<th class="description"><h:outputText value="#{localizedStrings['com.idega.telecom']['balance_viewer.description']}" /></th>
+											<th class="duration"><h:outputText value="#{localizedStrings['com.idega.telecom']['balance_viewer.length']}" /></th>
+											<th class="amount"><h:outputText value="#{localizedStrings['com.idega.telecom']['balance_viewer.amount']}" /></th>
 										</tr>
-									</tbody>
-								</ui:repeat>
-							</table>
-						</div>
-					</ui:repeat>
+									</thead>
+									<ui:repeat value="#{telecomBean.subEntriesMap[entry][subEntry]}" var="subSubEntry">
+										<tbody>
+											<tr>
+												<td class="date">
+													<h:outputText value="#{subSubEntry.usageDate}">
+														<f:convertDateTime pattern="d.M.yyyy HH:mm" />
+													</h:outputText>
+												</td>
+												<td class="description"><h:outputText value="#{subSubEntry.description}" /></td>
+												<td class="duration"><h:outputText value="#{subSubEntry.duration}" /></td>
+												<td class="amount">
+													<h:outputText value="#{subSubEntry.amount}">
+														<f:convertNumber type="currency" minFractionDigits="2" currencyCode="ISK"/>
+													</h:outputText>
+												</td>
+											</tr>
+										</tbody>
+									</ui:repeat>
+								</table>
+							</div>
+						</ui:repeat>
+					</div>
 				</div>
-			</div>
-		</ui:repeat>
+			</ui:repeat>
+		</ui:fragment>
+		<ui:fragment rendered="#{empty telecomBean.entries}">
+			<div class="noEntries"></div>
+		</ui:fragment>
 	</div>
 </ui:component>
 </html>

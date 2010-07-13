@@ -41,20 +41,23 @@ public class CurrentBalanceViewer extends TelecomBlock {
 				toDate = stamp.getDate();
 			}
 			
-			Map<UsageEntry, Map<UsageEntry, List<UsageEntry>>> map = getTelecomServices().getUsageEntriesByNumber(phone.getNumber(), new IWTimestamp(fromDate).toSQLDateString(), new IWTimestamp(toDate).toSQLDateString());
-			List<UsageEntry> keys = new ArrayList(map.keySet());
-			
-			Map<UsageEntry, List<UsageEntry>> entries = new HashMap<UsageEntry, List<UsageEntry>>();
-			for (UsageEntry usageEntry : keys) {
-				entries.put(usageEntry, new ArrayList(map.get(usageEntry).keySet()));
-			}
-			
 			TelecomBean bean = getBeanInstance("telecomBean");
-			bean.setEntries(keys);
-			bean.setEntriesMap(entries);
-			bean.setSubEntriesMap(map);
 			bean.setFromDate(fromDate);
 			bean.setToDate(toDate);
+
+			Map<UsageEntry, Map<UsageEntry, List<UsageEntry>>> map = getTelecomServices().getUsageEntriesByNumber(phone.getNumber(), new IWTimestamp(fromDate).toSQLDateString(), new IWTimestamp(toDate).toSQLDateString());
+			if (map != null) {
+				List<UsageEntry> keys = new ArrayList(map.keySet());
+				
+				Map<UsageEntry, List<UsageEntry>> entries = new HashMap<UsageEntry, List<UsageEntry>>();
+				for (UsageEntry usageEntry : keys) {
+					entries.put(usageEntry, new ArrayList(map.get(usageEntry).keySet()));
+				}
+				
+				bean.setEntries(keys);
+				bean.setEntriesMap(entries);
+				bean.setSubEntriesMap(map);
+			}
 
 			PresentationUtil.addJavaScriptSourceLineToHeader(iwc, getJQuery().getBundleURIToJQueryLib());
 			PresentationUtil.addJavaScriptSourceLineToHeader(iwc, getBundle().getVirtualPathWithFileNameString("javascript/balanceViewer.js"));
