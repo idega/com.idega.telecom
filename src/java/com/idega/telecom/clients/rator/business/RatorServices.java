@@ -129,7 +129,8 @@ public class RatorServices implements TelecomServices {
 		return map;
 	}
 
-	private Map<UsageEntry, Map<UsageEntry, List<UsageEntry>>> createMapFromWSUsageEntries(com.idega.telecom.webservice.client.UsageEntry wsEntries[]) {
+	private Map<UsageEntry, Map<UsageEntry, List<UsageEntry>>> createMapFromWSUsageEntries(
+			com.idega.telecom.webservice.client.UsageEntry wsEntries[]) {
 		Map<UsageEntry, Map<UsageEntry, List<UsageEntry>>> map = new HashMap<UsageEntry, Map<UsageEntry, List<UsageEntry>>>();
 
 		for (int i = 0; i < wsEntries.length; i++) {
@@ -148,7 +149,10 @@ public class RatorServices implements TelecomServices {
 				}
 			}
 			usageEntries.add(entry);
-			valueEntries.put(entry, usageEntries);
+			UsageEntry innerKeyEntry = new UsageEntry();
+			innerKeyEntry.setEntryType(entry.getEntryType());
+			innerKeyEntry.setDescription(entry.getDescription());
+			valueEntries.put(innerKeyEntry, usageEntries);
 
 			map.put(keyEntry, valueEntries);
 		}
@@ -376,7 +380,7 @@ public class RatorServices implements TelecomServices {
 		}
 		
 		FriendNumber number = new FriendNumber();
-
+		
 		number.setConnectedNumber(connectedNumber);
 		number.setFriendNumber(wsFriendNumber.getNumber());
 		SimpleDateFormat sdfDestination = new SimpleDateFormat("dd.MM.yyyy hh:mm:ss");
@@ -402,7 +406,7 @@ public class RatorServices implements TelecomServices {
 		phone.setCreditCardExpiryYear(wsPhone.getCreditCardExpiryYear());
 		phone.setCreditCardNumber(wsPhone.getCreditCardNumber());
 		phone.setForeignNumberLockEnabled(wsPhone.isForeignNumberLockEnabled());
-		// phone.setFriendNumbers(friendNumbers);
+		phone.setFriendNumbers(getFriendNumbers(wsPhone.getNumber(), wsPhone.getOwnerPersonalID()));
 		phone.setGoldNumber(wsPhone.isIsGoldNumber());
 		phone.setNumber(wsPhone.getNumber());
 		phone.setOwnerPersonalId(wsPhone.getOwnerPersonalID());
@@ -435,7 +439,13 @@ public class RatorServices implements TelecomServices {
 		//entry.setBillName(wsUsageEntry.g);
 		entry.setCountryOfOrigin(wsUsageEntry.getCountryOfOrigin());
 		entry.setDescription(wsUsageEntry.getDescription());
-		entry.setDuration(Float.toString(wsUsageEntry.getDuration()));
+		
+		IWTimestamp duration = new IWTimestamp();
+		duration.setHour(0);
+		duration.setMinute(0);
+		duration.setSecond((int)wsUsageEntry.getDuration());
+		
+		entry.setDuration(duration.getDateString("HH:mm:ss"));
 		entry.setEntryType(wsUsageEntry.getEntryType());
 		//entry.setInvoiceLines(wsUsageEntry.get);
 		//entry.setLocal(wsUsageEntry.get);

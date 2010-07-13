@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.idega.telecom.services.bean.FriendNumber;
 import com.idega.telecom.services.bean.UsageEntry;
 import com.idega.util.IWTimestamp;
 
@@ -50,16 +51,24 @@ public class TestClient {
 
 			// System.out.println("stamp = " + stamp.toString());
 
-			/*
-			 * FriendNumber numbers[] = port.friendsGetByNumber("8671374"); for
-			 * (int i = 0; i < numbers.length; i++) {
-			 * System.out.println("friend " + i + " = " +numbers[i].getNumber()
-			 * + " " + numbers[i].getEndDate()); }
-			 */
+			
+			com.idega.telecom.webservice.client.FriendNumber numbers[] = port.friendsGetByNumber("8671374"); 
+			  for (int i = 0; i < numbers.length; i++) {
+				  FriendNumber number = convertWSFriendNumberToFriendNumber("8671374", numbers[i]);
+				  
+				  System.out.println("orig.end = "+ numbers[i].getEndDate());
+				  System.out.println("orig.last = " + numbers[i].getLastChangedDate());
+				  if (number == null) {
+					  System.out.println("number is null");
+				  } else {
+					  System.out.println("conv.last = " + number.getLastChangedTimestamp());
+				  }
+			  }
+			 
 			// System.out.println("" + user.getGsmPhone());
 			// System.out.println(port.testHelloWorld());
 
-			IWTimestamp today = new IWTimestamp();
+			/*IWTimestamp today = new IWTimestamp();
 			IWTimestamp from = new IWTimestamp();
 			from.addDays(-14);
 
@@ -80,8 +89,7 @@ public class TestClient {
 					System.out.println(e.getDescription());
 					System.out.println("");
 				}
-
-			}
+			}*/
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -119,6 +127,28 @@ public class TestClient {
 			}
 		}
 	}
+	
+	private FriendNumber convertWSFriendNumberToFriendNumber(
+			String connectedNumber,
+			com.idega.telecom.webservice.client.FriendNumber wsFriendNumber) {
+		if (wsFriendNumber.getEndDate() != null && !"".equals(wsFriendNumber.getEndDate())) {
+			return null;
+		}
+		
+		FriendNumber number = new FriendNumber();
+		
+		number.setConnectedNumber(connectedNumber);
+		number.setFriendNumber(wsFriendNumber.getNumber());
+		SimpleDateFormat sdfDestination = new SimpleDateFormat("dd.MM.yyyy hh:mm:ss");
+		try {
+			IWTimestamp lt = new IWTimestamp(sdfDestination.parse(wsFriendNumber.getLastChangedDate()));
+			number.setLastChangedTimestamp(lt.getTimestamp());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		return number;
+	}
 
 	private Map<UsageEntry, Map<UsageEntry, List<UsageEntry>>> createMapFromWSUsageEntries(
 			com.idega.telecom.webservice.client.UsageEntry wsEntries[]) {
@@ -140,39 +170,52 @@ public class TestClient {
 				}
 			}
 			usageEntries.add(entry);
-			valueEntries.put(entry, usageEntries);
+			UsageEntry innerKeyEntry = new UsageEntry();
+			innerKeyEntry.setEntryType(entry.getEntryType());
+			innerKeyEntry.setDescription(entry.getDescription());
+			valueEntries.put(innerKeyEntry, usageEntries);
 
 			map.put(keyEntry, valueEntries);
 		}
 
+		createTotalsForMap(map);
+		
 		return map;
 	}
 
-	private UsageEntry convertWSUsageEntryToUsageEntry(
-			com.idega.telecom.webservice.client.UsageEntry wsUsageEntry) {
+	private UsageEntry convertWSUsageEntryToUsageEntry(com.idega.telecom.webservice.client.UsageEntry wsUsageEntry) {
 		UsageEntry entry = new UsageEntry();
 		entry.setAmount(wsUsageEntry.getAmount());
-		// entry.setBillName(wsUsageEntry.g);
+		//entry.setBillName(wsUsageEntry.g);
 		entry.setCountryOfOrigin(wsUsageEntry.getCountryOfOrigin());
 		entry.setDescription(wsUsageEntry.getDescription());
-		entry.setDuration(Float.toString(wsUsageEntry.getDuration()));
+		
+		IWTimestamp duration = new IWTimestamp();
+		duration.setHour(0);
+		duration.setMinute(0);
+		duration.setSecond((int)wsUsageEntry.getDuration());
+		
+		entry.setDuration(duration.getDateString("hh:mm:ss"));
 		entry.setEntryType(wsUsageEntry.getEntryType());
-		// entry.setInvoiceLines(wsUsageEntry.get);
-		// entry.setLocal(wsUsageEntry.get);
+		//entry.setInvoiceLines(wsUsageEntry.get);
+		//entry.setLocal(wsUsageEntry.get);
 		entry.setNumber(wsUsageEntry.getNumber());
 		entry.setOriginPhoneNumber(wsUsageEntry.getOriginPhoneNumber());
 		entry.setRecipientCountry(wsUsageEntry.getRecipientCountry());
-		// entry.setRecipientPhoneNumber(wsUsageEntry.get);
-		SimpleDateFormat sdfDestination = new SimpleDateFormat(
-				"dd.MM.yyyy hh:mm:ss");
+		//entry.setRecipientPhoneNumber(wsUsageEntry.get);
+		
+		System.out.println(wsUsageEntry.getUsageDate());
+		
+		SimpleDateFormat sdfDestination = new SimpleDateFormat("dd.MM.yyyy hh:mm:ss");
 		try {
-			entry.setUsageDate(new IWTimestamp(sdfDestination
-					.parse(wsUsageEntry.getUsageDate())).getTimestamp());
+			entry.setUsageDate(new IWTimestamp(sdfDestination.parse(wsUsageEntry.getUsageDate())).getTimestamp());
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
+		System.out.println("e = " + entry.getUsageDate());
+		
 		return entry;
 	}
 
