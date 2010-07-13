@@ -388,7 +388,6 @@ public class RatorServices implements TelecomServices {
 			IWTimestamp lt = new IWTimestamp(sdfDestination.parse(wsFriendNumber.getLastChangedDate()));
 			number.setLastChangedTimestamp(lt.getTimestamp());
 		} catch (ParseException e) {
-			e.printStackTrace();
 		}
 
 		return number;

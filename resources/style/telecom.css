@@ -20,7 +20,7 @@ form.telecomLogin p.balance {
 	font-weight: bold;
 }
 
-form.telecomLogin div.submit, form.userInformation div.buttonLayer {
+form.telecomLogin div.submit, form.userInformation div.buttonLayer, form.changePassword div.buttonLayer, form.friends div.buttonLayer, form.buyCredit div.buttonLayer {
 	width: 100%;
 	overflow: hidden;
 }
@@ -29,11 +29,11 @@ form.telecomLogin.loggedIn div.submit, form.telecomLogin.loginFailed div.submit 
 	margin-top: 12px;
 }
 
-form.userInformation div.buttonLayer {
+form.userInformation div.buttonLayer, form.changePassword div.buttonLayer, form.friends div.buttonLayer, form.buyCredit div.buttonLayer {
 	margin-top: 6px;
 }
 
-form.telecomLogin div.submit a, form.userInformation div.buttonLayer a, form.telecomBalanceViewer div.submit a {
+form.telecomLogin div.submit a, form.userInformation div.buttonLayer a, form.telecomBalanceViewer div.submit a, form.changePassword div.buttonLayer a, form.friends div.buttonLayer a, form.buyCredit div.buttonLayer a {
 	display: block;
 	border: 1px #999 solid;
 	border-radius: 10px;
@@ -54,6 +54,24 @@ form.userInformation div.buttonLayer a {
 	margin-left: 150px;
 }
 
+form.changePassword div.buttonLayer a {
+	border-color: #666;
+	float: left;
+	margin-left: 130px;
+}
+
+form.friends div.buttonLayer a {
+	border-color: #666;
+	float: left;
+	margin-left: 90px;
+}
+
+form.buyCredit div.buttonLayer a {
+	border-color: #666;
+	float: left;
+	margin-left: 90px;
+}
+
 div.unlockCodes {
 	border: 1px #f26522 solid;
 	padding: 8px 10px;
@@ -72,7 +90,7 @@ div.unlockCodes span {
 	color: #f26522;
 }
 
-form.userInformation div.formItem {
+form.userInformation div.formItem, form.changePassword div.formItem, form.friends div.formItem, form.buyCredit div.formItem {
 	font-size: 0.75em;
 	font-weight: bold;
 	width: auto;
@@ -80,19 +98,59 @@ form.userInformation div.formItem {
 	margin-bottom: 2px;
 }
 
-form.userInformation div.formItem label {
+form.userInformation div.formItem label, form.changePassword div.formItem label, form.friends div.formItem label, form.buyCredit div.formItem label {
 	float: left;
 	width: 150px;
 	line-height: 22px;
 }
 
-form.userInformation div.formItem input {
+form.changePassword div.formItem label {
+	width: 130px;
+}
+
+form.friends div.formItem label {
+	width: 90px;
+}
+
+form.buyCredit div.formItem label {
+	width: 90px;
+}
+
+form.userInformation div.formItem input, form.changePassword div.formItem input, form.friends div.formItem input, form.buyCredit div.formItem input {
 	border: 1px #ccc solid;
 	color: #333;
 	padding: 3px 4px;
 	width: 240px;
 	margin: 0;
 	float: left;
+}
+
+form.buyCredit div.formItem select {
+	border: 1px #ccc solid;
+	color: #333;
+	float: left;
+}
+
+form.changePassword div.formItem input {
+	width: 150px;
+}
+
+form.buyCredit div.formItem input {
+	width: 40px;
+	margin-right: 2px;
+}
+
+form.buyCredit div.formItem span {
+	float: left;
+	margin: 0 3px;
+}
+
+form.buyCredit div.formItem.cvcNumber input {
+	width: 30px;
+}
+
+form.friends div.formItem input {
+	width: 80px;
 }
 
 form.userInformation div.formItem input.postalCode {

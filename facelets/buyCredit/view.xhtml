@@ -20,7 +20,7 @@
 				<option value="10000">10000</option>
 			</select>
 		</div>
-		<div class="formItem">
+		<div class="formItem creditCard">
 			<label for="prm_credit_card_number"><h:outputText value="#{localizedStrings['com.idega.telecom']['buy_credit.card_number']}" /></label>
 			<c:textInput name="prm_credit_card_number" length="4" />
 			<c:textInput name="prm_credit_card_number" length="4" />
@@ -34,19 +34,20 @@
 					<option value="#{i}">#{i}</option>
 				</co:forEach>
 			</select>
+			<span>/</span>
 			<select name="prm_year">
-				<co:forEach var="i" begin="#{telecomBean.startYear" end="#{telecomBean.endYear}">
+				<co:forEach var="i" begin="2010" end="2020">
 					<option value="#{i}">#{i}</option>
 				</co:forEach>
 			</select>
 		</div>
-		<div class="formItem">
+		<div class="formItem cvcNumber">
 			<label for="prm_cvc_number"><h:outputText value="#{localizedStrings['com.idega.telecom']['buy_credit.cvc_number']}" /></label>
 			<c:textInput styleClass="prm_cvc_number" length="3" />
 		</div>
 		
 		<div class="buttonLayer">
-			<a href="#"><span><h:outputText value="#{localizedStrings['com.idega.telecom']['buy_credit.cvc_number']}" /></span></a>
+			<a href="#"><span><h:outputText value="#{localizedStrings['com.idega.telecom']['buy_credit.save']}" /></span></a>
 		</div>
 	</form>
 </ui:component>
