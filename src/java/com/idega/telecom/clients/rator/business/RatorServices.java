@@ -135,24 +135,40 @@ public class RatorServices implements TelecomServices {
 
 		for (int i = 0; i < wsEntries.length; i++) {
 			UsageEntry entry = convertWSUsageEntryToUsageEntry(wsEntries[i]);
+			
 			UsageEntry keyEntry = new UsageEntry();
 			keyEntry.setEntryType(entry.getEntryType());
-			Map<UsageEntry, List<UsageEntry>> valueEntries = map.get(keyEntry);
-			List<UsageEntry> usageEntries = null;
-			if (valueEntries == null) {
-				valueEntries = new HashMap<UsageEntry, List<UsageEntry>>();
-				usageEntries = new ArrayList<UsageEntry>();
-			} else {
-				usageEntries = valueEntries.get(entry);
-				if (usageEntries == null) {
-					usageEntries = new ArrayList<UsageEntry>();
-				}
-			}
-			usageEntries.add(entry);
 			UsageEntry innerKeyEntry = new UsageEntry();
 			innerKeyEntry.setEntryType(entry.getEntryType());
 			innerKeyEntry.setDescription(entry.getDescription());
+
+			UsageEntry allInnerEntriesKey = new UsageEntry();
+			allInnerEntriesKey.setEntryType("all_entries"); //@TODO localize
+			allInnerEntriesKey.setDescription("all_entries");
+
+			
+			Map<UsageEntry, List<UsageEntry>> valueEntries = map.get(keyEntry);
+			List<UsageEntry> usageEntries = null;
+			List<UsageEntry> allUsageEntries = null;
+			if (valueEntries == null) {
+				valueEntries = new HashMap<UsageEntry, List<UsageEntry>>();
+				usageEntries = new ArrayList<UsageEntry>();
+				allUsageEntries = new ArrayList<UsageEntry>();
+			} else {
+				usageEntries = valueEntries.get(innerKeyEntry);
+				allUsageEntries = valueEntries.get(allInnerEntriesKey);
+				if (usageEntries == null) {
+					usageEntries = new ArrayList<UsageEntry>();
+				}
+				
+				if (allUsageEntries == null) {
+					allUsageEntries = new ArrayList<UsageEntry>();					
+				}
+			}
+			usageEntries.add(entry);
+			allUsageEntries.add(entry);
 			valueEntries.put(innerKeyEntry, usageEntries);
+			valueEntries.put(allInnerEntriesKey, allUsageEntries);
 
 			map.put(keyEntry, valueEntries);
 		}
@@ -179,8 +195,10 @@ public class RatorServices implements TelecomServices {
 					for (UsageEntry e3 : entries) {
 						innerTotal += e3.getAmount();
 						innerCount++;
-						total += e3.getAmount();
-						count++;
+						if (!e2.getEntryType().equals("all_entries")) {
+							total += e3.getAmount();
+							count++;							
+						}
 					}
 
 					e2.setAmount(innerTotal);
