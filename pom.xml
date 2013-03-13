@@ -8,19 +8,10 @@
 	</parent>
 	<name>Idega Telecom</name>
 	<packaging>jar</packaging>
-	<groupId>com.idega.block.addon</groupId>
+	<groupId>com.idega.block.private</groupId>
 	<artifactId>com.idega.telecom</artifactId>
-	<version>5.0.0-SNAPSHOT</version>
 	<inceptionYear>2008</inceptionYear>
 	<description>Telecom services</description>
-	<scm>
-		<!--
-			<connection>scm:cvs:ext:${user.name}@code.idega.com:/idega/cvs:${groupId}/${artifactId}/</connection>
-			<developerConnection>scm:cvs:ext:${user.name}@code.idega.com:/idega/cvs:${groupId}/${artifactId}/</developerConnection>
-		-->
-    <connection>scm:cvs:ext:idegaweb@code.idega.com:/idega/cvs:com.idega.block.addon/com.idega.telecom</connection>
-    <developerConnection>scm:cvs:ext:idegaweb@code.idega.com:/idega/cvs:com.idega.block.addon/com.idega.telecom</developerConnection>
-  </scm>
 	<developers>
 		<developer>
 			<name>Valdas Žemaitis</name>
