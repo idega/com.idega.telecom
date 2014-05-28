@@ -1,10 +1,19 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+target/
+.settings/
+.settings/org.maven.ide.eclipse.prefs
+>>>>>>> f4d8c6453c3c7abc3abe252c8cf4f372cd5bbeb6
 target
 .settings
 .classpath
 .project
+<<<<<<< HEAD
 =======
 target/
 .settings/
 .settings/org.maven.ide.eclipse.prefs
 >>>>>>> 24abd03fc9a2ee3eed98b2c2cd1a9ba9b2b93069
+=======
+>>>>>>> f4d8c6453c3c7abc3abe252c8cf4f372cd5bbeb6
