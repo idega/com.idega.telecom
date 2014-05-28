@@ -1,3 +1,6 @@
+target/
+.settings/
+.settings/org.maven.ide.eclipse.prefs
 target
 .settings
 .classpath
